@@ -92,7 +92,7 @@ class cobbler (
   $domain             = $cobbler::params::domain,
   $dhcp_option        = $cobbler::params::dhcp_option,
   $manage_tftpd       = $cobbler::params::manage_tftpd,
-  $tftpd_option       = $cobbler::params::tftpd_option,
+  $tftpd_option       = 'tftpd_py', # could be in_tftpd too
   $server_ip          = $cobbler::params::server_ip,
   $next_server_ip     = $cobbler::params::next_server_ip,
   $nameservers        = $cobbler::params::nameservers,
@@ -118,7 +118,9 @@ class cobbler (
   require apache::mod::proxy_http
 
   # install section
-  package { $tftpd_package: ensure => present, }
+  if $tftpd_option == 'in_tftpd' {
+    package { $tftpd_package: ensure => present, }
+  }
   package { 'syslinux':    ensure => present, }
   package { $package_name :
     ensure  => $package_ensure,

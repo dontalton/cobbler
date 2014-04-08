@@ -52,7 +52,6 @@ class cobbler::params {
 
   # tftpd options
   $manage_tftpd = 1
-  $tftpd_option = 'in_tftpd'
 
   # puppet integration setup
   $puppet_auto_setup                     = 1
