@@ -1,0 +1,223 @@
+{
+  "checksums": {
+    "templates/dhcp.template.erb": "1a120388516e6fb95ddc3d5a380aec6e",
+    "templates/settings.erb": "79253cdba4e18b916febbc4ffe85f907",
+    "files/cobbler_web.conf": "fc7e512d85bbfca2c97033310404d54f",
+    "manifests/web.pp": "ef853068b9b1901ecd940cf57752bfb9",
+    "manifests/params.pp": "0433e1df29c6397b17c4ad567ad3c5c6",
+    "lib/puppet/type/cobblerrepo.rb": "a1b81671f7ae6a67b4b7d86f12c28361",
+    "lib/puppet/type/cobblerprofile.rb": "ee9284b8045e31b44c6ae786ed842b21",
+    "templates/modules.conf.erb": "1d07798980e93dd2555e5459ece9fac7",
+    "templates/cobbler.conf.erb": "a7002f68f558495ac28c5b88a1c9902f",
+    "files/wsgi.conf": "3815143a69a4d9d6cdfafefc63e1a44b",
+    "files/modules.conf": "1c374efc98e0f4610cda9e445400a392",
+    "lib/puppet/provider/cobblerprofile/profile.rb": "4ead69f6a5a4da0a60bebc648794322b",
+    "lib/puppet/provider/cobblerrepo/repo.rb": "ca2f7f4f36b81b607b8fce7d78e21aa4",
+    "templates/CentOS-6.3-x86_64.ks.erb": "d282056aa33726e862e5c6f0ccfd1169",
+    "templates/proxy_cobbler.conf.erb": "15359ca8399a3b0802c167088b482945",
+    "manifests/del_distro.pp": "7828c95407a706e796fa565b862041a5",
+    "lib/puppet/type/cobblersystem.rb": "f22802d80e97630cfde827b9f24e947a",
+    "templates/distros.conf.erb": "a0bca863436401be59229ada7e14a900",
+    "templates/CentOS-5.8-x86_64.ks.erb": "793fccb80082b6bc699621b8cb16e840",
+    "Readme.md": "bf469bf9afa7dd31e1746a259ccfb0ea",
+    "manifests/add_distro.pp": "a5e54bad61515bf5b1dcb2f5c6b4385c",
+    "Modulefile": "434c90e90cab3de6ca6b73f945d220e2",
+    "manifests/dhcp.pp": "220d6990692bf032c47b3a51f0cd24d0",
+    "manifests/init.pp": "11488ba7a0eb20015549d7cccde10ec7",
+    "lib/puppet/type/cobblerdistro.rb": "bc78dd61da0011f77a066a5bbb4e3ede",
+    "lib/puppet/provider/cobblersystem/system.rb": "5c7a6523a611ae5b305ef874ca4f7e7a",
+    "lib/puppet/provider/cobblerdistro/distro.rb": "8a1520191143709c1f445ea0f399edb3"
+  },
+  "author": "Jakov Sosic <jsosic@gmail.com>",
+  "dependencies": [
+    {
+      "version_requirement": ">= 0.5.0",
+      "name": "puppetlabs/apache"
+    }
+  ],
+  "source": "https://bitbucket.org/jsosic/puppet-cobbler/src",
+  "types": [
+    {
+      "parameters": [
+        {
+          "doc": "The name of the distro, that will create subdir in $distro",
+          "name": "name"
+        },
+        {
+          "doc": "The link of the distro ISO image.",
+          "name": "isolink"
+        },
+        {
+          "doc": "The link of the distro ISO image.",
+          "name": "destdir"
+        }
+      ],
+      "properties": [
+        {
+          "doc": "The basic property that the resource should be in.  Valid values are `present`, `absent`.",
+          "name": "ensure"
+        },
+        {
+          "doc": "The architecture of distro (x86_64 or i386).  Valid values are `x86_64`, `i386`.",
+          "name": "arch"
+        },
+        {
+          "doc": "Kernel (Absolute path to kernel on filesystem)",
+          "name": "kernel"
+        },
+        {
+          "doc": "Initrd (Absolute path to initrd on filesystem)",
+          "name": "initrd"
+        },
+        {
+          "doc": "Human readable description of distribution.",
+          "name": "comment"
+        }
+      ],
+      "doc": "The cobbler distro type",
+      "name": "cobblerdistro",
+      "providers": [
+        {
+          "doc": "Support for managing the Cobbler distros\n\nRequired binaries: `/usr/bin/wget`, `/bin/cp`, `/bin/mount`, `/bin/umount`, `/usr/bin/cobbler`.",
+          "name": "distro"
+        }
+      ]
+    },
+    {
+      "parameters": [
+        {
+          "doc": "The name of the repo, will be seen in cobbler repo list",
+          "name": "name"
+        }
+      ],
+      "properties": [
+        {
+          "doc": "The basic property that the resource should be in.  Valid values are `present`, `absent`.",
+          "name": "ensure"
+        },
+        {
+          "doc": "The architecture of repository (x86_64 or i386).  Valid values are `x86_64`, `i386`.",
+          "name": "arch"
+        },
+        {
+          "doc": "Priority of the repository",
+          "name": "priority"
+        },
+        {
+          "doc": "The link of the repo",
+          "name": "mirror"
+        },
+        {
+          "doc": "Keep local mirror or not.  Valid values are `true`, `false`.",
+          "name": "mirror_locally"
+        },
+        {
+          "doc": "Keep local mirrors updated.  Valid values are `true`, `false`.",
+          "name": "keep_updated"
+        },
+        {
+          "doc": "Human readable description of repository.",
+          "name": "comment"
+        }
+      ],
+      "doc": "The cobbler repo type",
+      "name": "cobblerrepo",
+      "providers": [
+        {
+          "doc": "Support for managing the Cobbler repos\n\nRequired binaries: `/usr/bin/cobbler`.",
+          "name": "repo"
+        }
+      ]
+    },
+    {
+      "parameters": [
+        {
+          "doc": "The name of the profile",
+          "name": "name"
+        }
+      ],
+      "properties": [
+        {
+          "doc": "The basic property that the resource should be in.  Valid values are `present`, `absent`.",
+          "name": "ensure"
+        },
+        {
+          "doc": "Distribution this profile is based on",
+          "name": "distro"
+        },
+        {
+          "doc": "Kickstart file used by profile",
+          "name": "kickstart"
+        },
+        {
+          "doc": "List of nameservers for this profile",
+          "name": "nameservers"
+        },
+        {
+          "doc": "list of repositories added to profile",
+          "name": "repos"
+        }
+      ],
+      "doc": "The cobbler profile type",
+      "name": "cobblerprofile",
+      "providers": [
+        {
+          "doc": "Support for managing the Cobbler profiles\n\nRequired binaries: `/usr/bin/cobbler`.",
+          "name": "profile"
+        }
+      ]
+    },
+    {
+      "parameters": [
+        {
+          "doc": "The name of the system",
+          "name": "name"
+        }
+      ],
+      "properties": [
+        {
+          "doc": "The basic property that the resource should be in.  Valid values are `present`, `absent`.",
+          "name": "ensure"
+        },
+        {
+          "doc": "Profile that is linked with system",
+          "name": "profile"
+        },
+        {
+          "doc": "The list of interfaces in system.",
+          "name": "interfaces"
+        },
+        {
+          "doc": "IP address of gateway.",
+          "name": "gateway"
+        },
+        {
+          "doc": "The hostname of the system, can be equal to name",
+          "name": "hostname"
+        },
+        {
+          "doc": "Enable reinstallation of system.  Valid values are `true`, `false`.",
+          "name": "netboot"
+        },
+        {
+          "doc": "",
+          "name": "comment"
+        }
+      ],
+      "doc": "The cobbler system type",
+      "name": "cobblersystem",
+      "providers": [
+        {
+          "doc": "Support for managing the Cobbler systems\n\nRequired binaries: `/usr/bin/cobbler`.",
+          "name": "system"
+        }
+      ]
+    }
+  ],
+  "license": "Apache 2.0",
+  "version": "1.2.1",
+  "description": "Module for Cobbler configuration",
+  "name": "puppet-cobbler",
+  "project_page": "https://bitbucket.org/jsosic/puppet-cobbler",
+  "summary": "Puppet module for Cobbler"
+}
