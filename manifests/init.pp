@@ -119,12 +119,15 @@ class cobbler (
 
   # install section
   if $tftpd_option == 'in_tftpd' {
-    package { $tftpd_package: ensure => present, }
+    package { $tftpd_package:
+      ensure => present,
+      before => Package['syslinux'],
+    }
   }
   package { 'syslinux':    ensure => present, }
   package { $package_name :
     ensure  => $package_ensure,
-    require => [ Package['syslinux'], Package[$tftpd_package], ],
+    require => Package['syslinux'],
   }
 
   service { $service_name :
