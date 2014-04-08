@@ -89,6 +89,8 @@ class cobbler (
   $dhcp_dynamic_range = $cobbler::params::dhcp_dynamic_range,
   $manage_dns         = $cobbler::params::manage_dns,
   $dns_option         = $cobbler::params::dns_option,
+  $domain             = $cobbler::params::domain,
+  $dhcp_option        = $cobbler::params::dhcp_option,
   $manage_tftpd       = $cobbler::params::manage_tftpd,
   $tftpd_option       = $cobbler::params::tftpd_option,
   $server_ip          = $cobbler::params::server_ip,
@@ -102,6 +104,12 @@ class cobbler (
   $purge_repo         = $cobbler::params::purge_repo,
   $purge_profile      = $cobbler::params::purge_profile,
   $purge_system       = $cobbler::params::purge_system,
+  $apache_conf_dir    = $cobbler::params::apache_conf_dir,
+  $dhcp_use_isc       = false,
+  $dhcp_package_isc   = $cobbler::params::dhcp_package_isc,
+  $dhcp_package_dnsmasq = $cobbler::params::dhcp_package_dnsmasq,
+  $tftpd_package        = $cobbler::params::tftpd_package,
+
 ) inherits cobbler::params {
 
   # require apache modules
@@ -110,11 +118,11 @@ class cobbler (
   require apache::mod::proxy_http
 
   # install section
-  package { 'tftp-server': ensure => present, }
+  package { $tftpd_package: ensure => present, }
   package { 'syslinux':    ensure => present, }
   package { $package_name :
     ensure  => $package_ensure,
-    require => [ Package['syslinux'], Package['tftp-server'], ],
+    require => [ Package['syslinux'], Package[$tftpd_package], ],
   }
 
   service { $service_name :
@@ -130,7 +138,7 @@ class cobbler (
     group  => root,
     mode   => '0644',
   }
-  file { '/etc/httpd/conf.d/proxy_cobbler.conf':
+  file { "${apache_conf_dir}/proxy_cobbler.conf":
     content => template('cobbler/proxy_cobbler.conf.erb'),
     notify  => Service[$apache_service],
   }
@@ -152,8 +160,8 @@ class cobbler (
     require => Package[$package_name],
     notify  => Service[$service_name],
   }
-  file { '/etc/httpd/conf.d/distros.conf': content => template('cobbler/distros.conf.erb'), }
-  file { '/etc/httpd/conf.d/cobbler.conf': content => template('cobbler/cobbler.conf.erb'), }
+  file { "${apache_conf_dir}/distros.conf": content => template('cobbler/distros.conf.erb'), }
+  file { "${apache_conf_dir}/cobbler.conf": content => template('cobbler/cobbler.conf.erb'), }
 
   # cobbler sync command
   exec { 'cobblersync':
@@ -177,22 +185,27 @@ class cobbler (
 
   # include ISC DHCP only if we choose manage_dhcp
   if $manage_dhcp == '1' {
-    package { 'dhcp':
-      ensure => present,
-    }
-    service { 'dhcpd':
-      ensure  => running,
-      require => Package['dhcp'],
-    }
-    file { '/etc/cobbler/dhcp.template':
-      ensure  => present,
-      owner   => root,
-      group   => root,
-      mode    => '0644',
-      content => template('cobbler/dhcp.template.erb'),
-      require => Package[$package_name],
-      notify  => Exec['cobblersync'],
+    if $dhcp_use_isc {
+      package { $dhcp_package_isc:
+        ensure => present,
+      }
+      service { 'dhcpd':
+        ensure  => running,
+        require => Package['dhcp'],
+      }
+      file { '/etc/cobbler/dhcp.template':
+        ensure  => present,
+        owner   => root,
+        group   => root,
+        mode    => '0644',
+        content => template('cobbler/dhcp.template.erb'),
+        require => Package[$package_name],
+        notify  => Exec['cobblersync'],
+      }
+    } else {
+      package { $dhcp_package_dnsmasq:
+        ensure => present,
+      }
     }
   }
 }
-# vi:nowrap:
