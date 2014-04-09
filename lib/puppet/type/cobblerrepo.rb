@@ -34,7 +34,7 @@ This rule would ensure that the kernel swappiness setting be set to '20'"
       when :i86pc
         :i386
       else
-        super
+        value
       end
     end
   end
