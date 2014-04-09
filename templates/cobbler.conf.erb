@@ -11,8 +11,7 @@ WSGIScriptAliasMatch ^/cblr/svc/([^/]*) /var/www/cobbler/svc/services.py
 
 <Directory "/var/www/cobbler">
     Options Indexes FollowSymLinks
-    Order allow,deny
-    Allow from all
+    Require all granted
 </Directory>
 
 ProxyRequests off
@@ -28,7 +27,6 @@ BrowserMatch "MSIE" AuthDigestEnableQueryStringHack=On
 
 <Directory "/var/www/cobbler/web/">
     Options Indexes FollowSymLinks
-    Order allow,deny
-    Allow from all
+    Require all granted
 </Directory>
 
