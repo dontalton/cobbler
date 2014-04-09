@@ -21,6 +21,15 @@ cobbler::add_distro { 'debian':
   distro_os => 'debian',
 }
 
+cobblerprofile { 'debian':
+  ensure      => present,
+  distro      => 'debian',
+  nameservers => $cobbler::nameservers,
+  repos       => ['PuppetLabs-6-x86_64-deps'],
+  kickstart   => '/var/lib/cobbler/kickstarts/ubuntu-server.preseed',
+}
+
+
 cobblerrepo { 'PuppetLabs-6-x86_64-deps':
   ensure         => present,
   arch           => 'x86_64',
@@ -34,7 +43,7 @@ cobblerprofile { 'CentOS-6.5-x86_64':
   ensure      => present,
   distro      => 'CentOS-6.5-x86_64',
   nameservers => $cobbler::nameservers,
-  repos       => ['PuppetLabs-6-x86_64-deps', 'PuppetLabs-6-x86_64-products' ],
+  repos       => ['PuppetLabs-6-x86_64-deps'],
   kickstart   => '/var/lib/cobbler/kickstarts/default.ks',
 }
 
