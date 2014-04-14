@@ -11,8 +11,7 @@ WSGIScriptAliasMatch ^/cblr/svc/([^/]*) <%= @webroot -%>/svc/services.py
 
 <Directory "<%= @webroot %>">
     Options Indexes FollowSymLinks
-    Order allow,deny
-    Allow from all
+    Require all granted
 </Directory>
 
 ProxyRequests off
@@ -28,7 +27,6 @@ BrowserMatch "MSIE" AuthDigestEnableQueryStringHack=On
 
 <Directory "<%= @webroot %>/web/">
     Options Indexes FollowSymLinks
-    Order allow,deny
-    Allow from all
+    Require all granted
 </Directory>
 

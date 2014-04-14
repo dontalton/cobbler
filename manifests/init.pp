@@ -109,6 +109,7 @@ class cobbler (
   $dhcp_package_isc   = $cobbler::params::dhcp_package_isc,
   $dhcp_package_dnsmasq = $cobbler::params::dhcp_package_dnsmasq,
   $tftpd_package        = $cobbler::params::tftpd_package,
+  $webroot              = '/var/www/cobbler',
 
 ) inherits cobbler::params {
 

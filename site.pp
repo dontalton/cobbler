@@ -26,7 +26,7 @@ cobbler::add_distro { 'precise-x86_64':
 
 cobblerprofile { 'precise-x86_64':
   ensure      => present,
-  distro      => 'debian',
+  distro      => 'precise-x86_64',
   nameservers => $cobbler::nameservers,
 #  repos       => ['precise-x86_64'],
   kickstart   => '/var/lib/cobbler/kickstarts/ubuntu-server.preseed',
@@ -40,12 +40,12 @@ package { 'yum-utils':
 cobblersystem { 'precise-host':
   ensure     => present,
   profile    => 'precise-x86_64',
-  interfaces => { 'eth0' => {
+  interfaces => { 'eth1' => {
                     mac_address      => 'AA:BB:CC:DD:EE:F0',
                     ip_address       => '10.0.0.2',
                     netmask          => '255.255.255.0',
                   },
-                  'eth1' => {
+                  'eth2' => {
                     mac_address      => 'AA:BB:CC:DD:EE:F1',
                     ip_address       => '0.0.0.0',
                     netmask          => '255.255.255.0',
