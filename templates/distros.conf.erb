@@ -1,5 +1,7 @@
 AliasMatch ^/distros(.*)?$ "<%= @distro_path %>$1"
 
 <Directory "<%= @distro_path %>">
-	Require all granted
+	Options Indexes FollowSymLinks
+	Order allow,deny
+	Allow from all
 </Directory>

@@ -9,75 +9,49 @@ class { 'cobbler':
   dhcp_use_isc    => false,
 }
 
-cobbler::add_distro { 'CentOS-6.5-x86_64':
-  arch    => 'x86_64',
-  isolink => 'http://localhost/CentOS-6.5-x86_64-netinstall.iso',
-  distro_os => 'rhel',
-}
-
-cobbler::add_distro { 'debian':
+cobbler::add_distro { 'precise-x86_64':
   arch => 'x86_64',
   isolink => 'http://localhost/ubunt-server-precise-mini.iso',
   distro_os => 'debian',
 }
 
-cobblerprofile { 'debian':
+#cobblerrepo { 'precise-x86_64':
+#  ensure         => present,
+#  arch           => 'x86_64',
+#  mirror         => 'http://us.archive.ubuntu.com/ubuntu//dists/precise',
+#  mirror_locally => false,
+#  priority       => 99,
+#  require        => [ Service[$cobbler::service_name], Service[$cobbler::apache_service] ],
+#}
+
+cobblerprofile { 'precise-x86_64':
   ensure      => present,
   distro      => 'debian',
   nameservers => $cobbler::nameservers,
-  repos       => ['PuppetLabs-6-x86_64-deps'],
+#  repos       => ['precise-x86_64'],
   kickstart   => '/var/lib/cobbler/kickstarts/ubuntu-server.preseed',
-}
-
-
-cobblerrepo { 'PuppetLabs-6-x86_64-deps':
-  ensure         => present,
-  arch           => 'x86_64',
-  mirror         => 'http://yum.puppetlabs.com/el/6/dependencies/x86_64',
-  mirror_locally => false,
-  priority       => 99,
-  require        => [ Service[$cobbler::service_name], Service[$cobbler::apache_service] ],
-}
-
-cobblerprofile { 'CentOS-6.5-x86_64':
-  ensure      => present,
-  distro      => 'CentOS-6.5-x86_64',
-  nameservers => $cobbler::nameservers,
-  repos       => ['PuppetLabs-6-x86_64-deps'],
-  kickstart   => '/var/lib/cobbler/kickstarts/default.ks',
 }
 
 package { 'yum-utils':
   ensure => installed,
-  before => Cobblerprofile['CentOS-6.5-x86_64'],
+  before => Cobblerprofile['precise-x86_64'],
 }
 
-cobblersystem { 'somehost':
+cobblersystem { 'precise-host':
   ensure     => present,
-  profile    => 'CentOS-6.5-x86_64',
+  profile    => 'precise-x86_64',
   interfaces => { 'eth0' => {
                     mac_address      => 'AA:BB:CC:DD:EE:F0',
-                    interface_type   => 'bond_slave',
-                    interface_master => 'bond0',
-                    static           => true,
-                    management       => true,
+                    ip_address       => '10.0.0.2',
+                    netmask          => '255.255.255.0',
                   },
                   'eth1' => {
                     mac_address      => 'AA:BB:CC:DD:EE:F1',
-                    interface_type   => 'bond_slave',
-                    interface_master => 'bond0',
-                    static           => true,
-                  },
-                  'bond0' => {
-                    ip_address     => '192.168.1.210',
-                    netmask        => '255.255.255.0',
-                    static         => true,
-                    interface_type => 'bond',
-                    bonding_opts   => 'miimon=300 mode=1 primary=em1',
+                    ip_address       => '0.0.0.0',
+                    netmask          => '255.255.255.0',
                   },
   },
   netboot    => true,
-  gateway    => '192.168.1.1',
-  hostname   => 'somehost.example.com',
+  hostname   => 'ubuntu.cisco.com',
   require    => Service[$cobbler::service_name],
 }
