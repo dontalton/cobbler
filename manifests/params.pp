@@ -6,7 +6,6 @@ class cobbler::params {
   case $::osfamily {
     'RedHat': {
       $service_name     = 'cobblerd'
-      $package_name     = 'cobbler'
       $apache_service   = 'httpd'
       $apache_conf_dir  = '/etc/httpd/conf.d'
       $dhcp_package_isc = 'dhcp'
@@ -15,7 +14,6 @@ class cobbler::params {
     }
     'Debian': {
       $service_name    = 'cobbler'
-      $package_name    = 'cobbler'
       $apache_service  = 'apache2'
       $apache_conf_dir = '/etc/apache2/conf.d'
       $dhcp_package_isc = 'isc-dhcp-server'

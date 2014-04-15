@@ -8,9 +8,6 @@
 #   - $service_name [type: string]
 #     Name of the cobbler service, defaults to 'cobblerd'.
 #
-#   - $package_name [type: string]
-#     Name of the installation package, defaults to 'cobbler'
-#
 #   - $package_ensure [type: string]
 #     Defaults to 'present', buy any version can be set
 #
@@ -82,7 +79,6 @@
 #
 class cobbler (
   $service_name       = $cobbler::params::service_name,
-  $package_name       = $cobbler::params::package_name,
   $package_ensure     = $cobbler::params::package_ensure,
   $distro_path        = $cobbler::params::distro_path,
   $manage_dhcp        = $cobbler::params::manage_dhcp,
@@ -125,8 +121,10 @@ class cobbler (
       before => Package['syslinux'],
     }
   }
-  package { 'syslinux':    ensure => present, }
-  package { $package_name :
+
+  package { 'syslinux': ensure => present, }
+
+  package { 'cobbler' :
     ensure  => $package_ensure,
     require => Package['syslinux'],
   }
@@ -134,7 +132,7 @@ class cobbler (
   service { $service_name :
     ensure  => running,
     enable  => true,
-    require => Package[$package_name],
+    require => Package['cobbler'],
   }
 
   # file defaults
@@ -144,29 +142,36 @@ class cobbler (
     group  => root,
     mode   => '0644',
   }
+
   file { "${apache_conf_dir}/proxy_cobbler.conf":
     content => template('cobbler/proxy_cobbler.conf.erb'),
     notify  => Service[$apache_service],
   }
+
   file { $distro_path :
     ensure => directory,
     mode   => '0755',
   }
+
   file { "${distro_path}/kickstarts" :
     ensure => directory,
     mode   => '0755',
   }
+
   file { '/etc/cobbler/settings':
     content => template('cobbler/settings.erb'),
-    require => Package[$package_name],
+    require => Package['cobbler'],
     notify  => Service[$service_name],
   }
+
   file { '/etc/cobbler/modules.conf':
     content => template('cobbler/modules.conf.erb'),
-    require => Package[$package_name],
+    require => Package['cobbler'],
     notify  => Service[$service_name],
   }
+
   file { "${apache_conf_dir}/distros.conf": content => template('cobbler/distros.conf.erb'), }
+
   file { "${apache_conf_dir}/cobbler.conf": content => template('cobbler/cobbler.conf.erb'), }
 
   # cobbler sync command
@@ -205,13 +210,22 @@ class cobbler (
         group   => root,
         mode    => '0644',
         content => template('cobbler/dhcp.template.erb'),
-        require => Package[$package_name],
+        require => Package['cobbler'],
         notify  => Exec['cobblersync'],
       }
     } else {
       package { $dhcp_package_dnsmasq:
-        ensure => present,
+        ensure  => present,
+        require => Package['syslinux'],
       }
+      file { '/etc/cobbler/dnsmasq.template':
+        ensure  => present,
+        owner   => root,
+        group   => root,
+        mode    => '0644',
+        content => file('cobbler/dnsmasq.template'),
+        require => Package['cobbler'],
+        notify  => Exec['cobblersync'],
     }
   }
 }
