@@ -7,6 +7,8 @@ class { 'cobbler':
   dhcp_option     => 'dnsmasq',
   domain          => 'cisco.com',
   dhcp_use_isc    => false,
+  server_ip => '10.0.0.1',
+  next_server_ip => '10.0.0.1',
 }
 
 cobbler::add_distro { 'precise-x86_64':
