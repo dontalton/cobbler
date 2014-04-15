@@ -31,14 +31,9 @@ cobblersystem { 'precise-host':
   ensure     => present,
   profile    => 'precise-x86_64',
   interfaces => { 'eth1' => {
-                    mac_address      => '08:00:27:4C:54:A1',
-                    ip_address       => '10.0.0.2',
-                    netmask          => '255.255.255.0',
-                  },
-                  'eth2' => {
-                    mac_address      => '08:00:27:12:C6:8A',
-                    ip_address       => '0.0.0.0',
-                    netmask          => '255.255.255.0',
+                    ip_address => '192.168.146.2',
+                    mac_address      => '08:00:27:00:80:ac',
+                    netmask   => '255.255.255.0',
                   },
   },
   netboot    => true,

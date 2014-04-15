@@ -92,7 +92,7 @@ class cobbler (
   $domain             = $cobbler::params::domain,
   $dhcp_option        = $cobbler::params::dhcp_option,
   $manage_tftpd       = $cobbler::params::manage_tftpd,
-  $tftpd_option       = 'tftpd_py', # could be in_tftpd too
+  $tftpd_option       = 'in_tftpd', # could be in_tftpd too
   $server_ip          = $cobbler::params::server_ip,
   $next_server_ip     = $cobbler::params::next_server_ip,
   $nameservers        = $cobbler::params::nameservers,
