@@ -223,9 +223,10 @@ class cobbler (
         owner   => root,
         group   => root,
         mode    => '0644',
-        content => file('cobbler/dnsmasq.template'),
+        content => template('cobbler/dnsmasq.template'),
         require => Package['cobbler'],
         notify  => Exec['cobblersync'],
+      }
     }
   }
 }

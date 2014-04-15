@@ -30,13 +30,13 @@ package { 'yum-utils':
 cobblersystem { 'precise-host':
   ensure     => present,
   profile    => 'precise-x86_64',
-  interfaces => { 'eth1' => {
-                    ip_address => '192.168.146.2',
-                    mac_address      => '08:00:27:00:80:ac',
+  interfaces => { 'eth0' => {
+                    ip_address => '10.0.0.2',
+                    mac_address => '08:00:27:B0:3A:E0',
                     netmask   => '255.255.255.0',
                   },
   },
   netboot    => true,
-  hostname   => 'ubuntu.cisco.com',
+  hostname   => 'foo.cisco.com',
   require    => Service[$cobbler::service_name],
 }
