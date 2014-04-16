@@ -1,6 +1,10 @@
 Puppet module for managing Cobbler
 ==================================
 
+This fork supports RedHat AND Ubuntu Trusty LTS. It's also tested on 
+Ubuntu Precise LTS, but will require slight changes to go back to 
+Apache 2.2 directives.
+
 puppet-cobbler is a Puppet module used to deploy and manage Cobbler
 installation(s).
 
@@ -16,14 +20,7 @@ Puppet is an open source configuration management tool written in Ruby.
 Basic usage
 -----------
 
-To install Cobbler:
-
-    include cobbler
-
-To add cobbler web management:
-
-    include cobbler::web
-
+See examples/site.pp
 
 Distros, repos, profiles and systems
 ------------------------------------
@@ -31,10 +28,13 @@ Distros, repos, profiles and systems
 You can easily add distros to your Cobbler installation just by specifying
 download link of ISO image and distro name:
 
-    cobbler::add_distro { 'CentOS-6.3-x86_64':
+    cobbler::add_distro { 'precise-mini':
       arch    => 'x86_64',
-      isolink => 'http://mi.mirror.garr.it/mirrors/CentOS/6.3/isos/x86_64/CentOS-6.3-x86_64-bin-DVD1.iso',
+      isolink => 'http://archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/current/images/netboot/mini.iso',
     }
+
+
+
 
 Repos example:
 
@@ -49,15 +49,37 @@ Repos example:
 
 Profile example:
 
-    cobblerprofile { 'CentOS-6.3-x86_64':
+    cobblerprofile { 'precise-mini':
       ensure      => present,
-      distro      => 'CentOS-6.3-x86_64',
+      distro      => 'precise-mini',
       nameservers => $cobbler::nameservers,
-      repos       => ['PuppetLabs-6-x86_64-deps', 'PuppetLabs-6-x86_64-products' ],
-      kickstart   => '/somepath/kickstarts/CentOS-6.3-x86_64-static.ks',
+      kickstart   => '/var/lib/cobbler/kickstarts/ubuntu-server.preseed',
     }
 
-And finally, system:
+
+System example:
+
+    cobblersystem { 'somehost':
+      ensure     => present,
+      profile    => 'precise-mini',
+      interfaces => { 'eth0' => {
+                        mac_address      => 'AA:BB:CC:DD:EE:F0',
+                        ip_address       => '10.0.0.2',
+                        netmask          => '255.255.255.0',
+                      },
+                      'eth1' => {
+                        mac_address      => 'AA:BB:CC:DD:EE:F1',
+                        ip_address       => '10.0.0.3',
+                        netmask          => '255.255.255.0',
+                      },
+      },
+      netboot    => true,
+      gateway    => '10.0.0.1',
+      hostname   => 'somehost.cisco.com',
+      require    => Service[$cobbler::service_name],
+    }
+
+System example with bonded interfaces:
 
     cobblersystem { 'somehost':
       ensure     => present,
@@ -104,12 +126,14 @@ Notes
 Contributors
 ------------
 
- * currently none
+ * Don Talton
 
 Copyright and License
 ---------------------
 
 Copyright (C) 2012 Jakov Sosic <jsosic@gmail.com>
+Copyright (C) 2014 Cisco Systems
+  Author Don Talton <dotalton@cisco.com>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

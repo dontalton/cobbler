@@ -7,14 +7,14 @@ class { 'cobbler':
   dhcp_option     => 'dnsmasq',
   domain          => 'cisco.com',
   dhcp_use_isc    => false,
-  server_ip => '10.0.0.1',
-  next_server_ip => '10.0.0.1',
-  nameservers => '10.0.0.1',
+  server_ip       => '10.0.0.1',
+  next_server_ip  => '10.0.0.1',
+  nameservers     => '10.0.0.1',
 }
 
 cobbler::add_distro { 'precise-mini':
-  arch => 'x86_64',
-  isolink => 'http://localhost/ubunt-server-precise-mini.iso',
+  arch    => 'x86_64',
+  isolink => 'http://archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/current/images/netboot/mini.iso',
 }
 
 cobblerprofile { 'precise-mini':
