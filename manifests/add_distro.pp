@@ -1,15 +1,17 @@
 # Define: cobbler::add_distro
-define cobbler::add_distro ($arch,$isolink, $distro_os) {
+define cobbler::add_distro ($arch,$isolink) {
   include cobbler
   $distro = $title
   $server_ip = $cobbler::server_ip
 
-  if $distro_os == 'rhel' {
+  if $::osfamily == 'RedHat' {
     $kernel = "${cobbler::distro_path}/${distro}/images/pxeboot/vmlinuz"
     $initrd = "${cobbler::distro_path}/${distro}/images/pxeboot/initrd.img"
-  } elsif $distro_os == 'debian' {
+  } elsif $::osfamily == 'Debian' {
     $kernel = "${cobbler::distro_path}/${distro}/linux"
     $initrd = "${cobbler::distro_path}/${distro}/initrd.gz"
+  } else {
+    fail ("Unrecognized OS")
   }
 
   cobblerdistro { $distro :

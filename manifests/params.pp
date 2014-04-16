@@ -30,7 +30,7 @@ class cobbler::params {
   $next_server_ip = $::ipaddress
   $server_ip      = $::ipaddress
   $distro_path    = '/distro'
-  $nameservers    = '127.0.0.1'
+  $nameservers    = '10.0.0.1'
 
   # default root password for kickstart files
   $defaultrootpw = 'bettergenerateityourself'

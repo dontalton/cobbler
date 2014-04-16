@@ -68,7 +68,8 @@ Puppet::Type.type(:cobblersystem).provide(:system) do
   # sets netboot
   def netboot=(value)
     tmparg='--netboot-enabled=0'
-    tmparg='--netboot-enabled=1' if value.to_s.grep(/false/i).empty?
+#    tmparg='--netboot-enabled=1' if value.to_s.grep(/false/i).empty?
+    tmparg='--netboot-enabled=1' if value.to_s == "true"
     cobbler('system', 'edit', '--name=' + @resource[:name], tmparg)
     @property_hash[:netboot]=(value)
   end
