@@ -33,7 +33,7 @@
 #   - $manage_tftpd [type: bool]
 #     Wether or not to manage TFTP daemon.
 #
-#   - $tftpd_option [type:string]
+#   - $tftpd_package [type:string]
 #     Which TFTP daemon to use.
 #
 #   - $server_ip [type: string]
@@ -78,34 +78,34 @@
 # Sample Usage:
 #
 class cobbler (
-  $service_name       = $cobbler::params::service_name,
-  $package_ensure     = $cobbler::params::package_ensure,
-  $distro_path        = $cobbler::params::distro_path,
-  $manage_dhcp        = $cobbler::params::manage_dhcp,
-  $dhcp_dynamic_range = $cobbler::params::dhcp_dynamic_range,
-  $manage_dns         = $cobbler::params::manage_dns,
-  $dns_option         = $cobbler::params::dns_option,
-  $domain             = $cobbler::params::domain,
-  $dhcp_option        = $cobbler::params::dhcp_option,
-  $manage_tftpd       = $cobbler::params::manage_tftpd,
-  $tftpd_option       = 'in_tftpd', # could be in_tftpd too
-  $server_ip          = $cobbler::params::server_ip,
-  $next_server_ip     = $cobbler::params::next_server_ip,
-  $nameservers        = $cobbler::params::nameservers,
-  $dhcp_interfaces    = $cobbler::params::dhcp_interfaces,
-  $defaultrootpw      = $cobbler::params::defaultrootpw,
-  $apache_service     = $cobbler::params::apache_service,
-  $allow_access       = $cobbler::params::allow_access,
-  $purge_distro       = $cobbler::params::purge_distro,
-  $purge_repo         = $cobbler::params::purge_repo,
-  $purge_profile      = $cobbler::params::purge_profile,
-  $purge_system       = $cobbler::params::purge_system,
-  $apache_conf_dir    = $cobbler::params::apache_conf_dir,
-  $dhcp_use_isc       = false,
-  $dhcp_package_isc   = $cobbler::params::dhcp_package_isc,
+  $service_name         = $cobbler::params::service_name,
+  $package_ensure       = $cobbler::params::package_ensure,
+  $distro_path          = $cobbler::params::distro_path,
+  $manage_dhcp          = $cobbler::params::manage_dhcp,
+  $dhcp_dynamic_range   = $cobbler::params::dhcp_dynamic_range,
+  $manage_dns           = $cobbler::params::manage_dns,
+  $dns_option           = $cobbler::params::dns_option,
+  $domain               = $cobbler::params::domain,
+  $dhcp_option          = $cobbler::params::dhcp_option,
+  $manage_tftpd         = $cobbler::params::manage_tftpd,
+  $tftpd_package        = $cobbler::params::tftpd_package,
+  $server_ip            = $cobbler::params::server_ip,
+  $next_server_ip       = $cobbler::params::next_server_ip,
+  $nameservers          = $cobbler::params::nameservers,
+  $dhcp_interfaces      = $cobbler::params::dhcp_interfaces,
+  $defaultrootpw        = $cobbler::params::defaultrootpw,
+  $apache_service       = $cobbler::params::apache_service,
+  $allow_access         = $cobbler::params::allow_access,
+  $purge_distro         = $cobbler::params::purge_distro,
+  $purge_repo           = $cobbler::params::purge_repo,
+  $purge_profile        = $cobbler::params::purge_profile,
+  $purge_system         = $cobbler::params::purge_system,
+  $apache_conf_dir      = $cobbler::params::apache_conf_dir,
+  $dhcp_use_isc         = false,
+  $dhcp_package_isc     = $cobbler::params::dhcp_package_isc,
   $dhcp_package_dnsmasq = $cobbler::params::dhcp_package_dnsmasq,
   $tftpd_package        = $cobbler::params::tftpd_package,
-  $webroot              = '/var/www/cobbler',
+  $webroot              = $cobbler::params::webroot,
 
 ) inherits cobbler::params {
 
@@ -115,14 +115,16 @@ class cobbler (
   require apache::mod::proxy_http
 
   # install section
-  if $tftpd_option == 'in_tftpd' {
+  if $tftpd_package == 'in_tftpd' {
     package { $tftpd_package:
       ensure => present,
       before => Package['syslinux'],
     }
   }
 
-  package { 'syslinux': ensure => present, }
+  package { 'syslinux':
+    ensure => present,
+  }
 
   package { 'cobbler' :
     ensure  => $package_ensure,
@@ -170,9 +172,13 @@ class cobbler (
     notify  => Service[$service_name],
   }
 
-  file { "${apache_conf_dir}/distros.conf": content => template('cobbler/distros.conf.erb'), }
+  file { "${apache_conf_dir}/distros.conf":
+    content => template('cobbler/distros.conf.erb'),
+  }
 
-  file { "${apache_conf_dir}/cobbler.conf": content => template('cobbler/cobbler.conf.erb'), }
+  file { "${apache_conf_dir}/cobbler.conf":
+    content => template('cobbler/cobbler.conf.erb'),
+  }
 
   # cobbler sync command
   exec { 'cobblersync':
