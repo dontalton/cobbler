@@ -3,7 +3,6 @@
 #
 <IfModule mod_proxy.c>
   <Proxy http://localhost:25151/ >
-#    Require host <%= @allow_access %>
      Require all granted
   </Proxy>
 </IfModule>
