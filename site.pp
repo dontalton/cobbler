@@ -37,6 +37,11 @@ cobblersystem { 'precise-host':
                     mac_address => '08:00:27:B0:3A:E0',
                     netmask   => '255.255.255.0',
                   },
+                  'eth1' => {
+                    ip_address => '10.0.0.3',
+                    mac_address => '',
+                    netmask => '255.255.255.0',
+                  },
   },
   netboot    => true,
   hostname   => 'foo.cisco.com',
