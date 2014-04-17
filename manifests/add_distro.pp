@@ -3,6 +3,7 @@ define cobbler::add_distro ($arch,$isolink) {
   include cobbler
   $distro = $title
   $server_ip = $cobbler::server_ip
+  $diskpart = $cobbler::params::diskpart
 
   if $::osfamily == 'RedHat' {
     $kernel = "${cobbler::distro_path}/${distro}/images/pxeboot/vmlinuz"
@@ -21,12 +22,12 @@ define cobbler::add_distro ($arch,$isolink) {
     destdir => $cobbler::distro_path,
     kernel  => $kernel,
     initrd  => $initrd,
-    require => [ Service[$cobbler::service_name], Service[$cobbler::apache_service] ],
+    require => [ Service[$cobbler::service_name], Service[$cobbler::apache_service], File['/etc/cobbler/preseed/cisco-preseed'] ],
   }
   $defaultrootpw = $cobbler::defaultrootpw
-  file { "${cobbler::distro_path}/kickstarts/${distro}.ks":
+  file { "${cobbler::distro_path}/kickstarts/cisco.ks":
     ensure  => present,
-    content => template("cobbler/${distro}.ks.erb"),
+    content => template("cobbler/cisco.ks.erb"),
     require => File["${cobbler::distro_path}/kickstarts"],
   }
 }

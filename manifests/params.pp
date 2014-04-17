@@ -38,13 +38,13 @@ class cobbler::params {
   $defaultrootpw = 'bettergenerateityourself'
 
   # dhcp options
-  $manage_dhcp        = 0
-  $dhcp_option        = 'isc'
+  $manage_dhcp        = 1
+  $dhcp_option        = 'dnsmasq'
   $dhcp_interfaces    = 'eth0'
   $dhcp_dynamic_range = 0
 
   # dns options
-  $manage_dns = 0
+  $manage_dns = 1
   $dns_option = 'dnsmasq'
 
   # dns domain name
@@ -66,4 +66,8 @@ class cobbler::params {
   $purge_repo    = true
   $purge_profile = true
   $purge_system  = true
+
+  # disk partitioning
+  $diskpart = []
 }
+

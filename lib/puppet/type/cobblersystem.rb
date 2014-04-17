@@ -97,6 +97,11 @@ cobblersystem { 'test.domain.com':
     defaultto ''
   end
 
+  newproperty(:nameservers) do
+    desc 'name servers'
+    defaultto ''
+  end
+
   newproperty(:power_address) do
     desc 'power address'
     defaultto ''

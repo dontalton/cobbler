@@ -101,11 +101,11 @@ class cobbler (
   $purge_profile        = $cobbler::params::purge_profile,
   $purge_system         = $cobbler::params::purge_system,
   $apache_conf_dir      = $cobbler::params::apache_conf_dir,
-  $dhcp_use_isc         = false,
   $dhcp_package_isc     = $cobbler::params::dhcp_package_isc,
   $dhcp_package_dnsmasq = $cobbler::params::dhcp_package_dnsmasq,
   $tftpd_package        = $cobbler::params::tftpd_package,
   $webroot              = $cobbler::params::webroot,
+  $diskpart             = $cobbler::params::diskpart,
 
 ) inherits cobbler::params {
 
@@ -194,37 +194,34 @@ class cobbler (
     resources { 'cobblersystem':  purge => true, }
   }
 
-  # include ISC DHCP only if we choose manage_dhcp
-  if $manage_dhcp == '1' {
-    if $dhcp_use_isc {
-      package { $dhcp_package_isc:
-        ensure => present,
-      }
-      service { 'dhcpd':
-        ensure  => running,
-        require => Package['dhcp'],
-      }
-      file { '/etc/cobbler/dhcp.template':
-        ensure  => present,
-        owner   => root,
-        group   => root,
-        mode    => '0644',
-        content => template('cobbler/dhcp.template.erb'),
-        require => Package['cobbler'],
-      }
-    } else {
-      package { $dhcp_package_dnsmasq:
-        ensure  => present,
-        require => [ Package['cobbler'], Package['syslinux'] ],
-      }
-      file { '/etc/cobbler/dnsmasq.template':
-        ensure  => present,
-        owner   => root,
-        group   => root,
-        mode    => '0644',
-        content => template('cobbler/dnsmasq.template'),
-        require => [ Package[$dhcp_package_dnsmasq], Package['cobbler'] ],
-      }
-    }
+  package { $dhcp_package_dnsmasq:
+    ensure  => present,
+    require => [ Package['cobbler'], Package['syslinux'] ],
   }
+
+  file { '/etc/cobbler/dnsmasq.template':
+    ensure  => present,
+    owner   => root,
+    group   => root,
+    mode    => '0644',
+    content => template('cobbler/dnsmasq.template'),
+    require => [ Package[$dhcp_package_dnsmasq], Package['cobbler'] ],
+  }
+
+  file { '/etc/logrotate.d/cobbler_rotate':
+    content => template('cobbler/cobbler_rotate.erb'),
+    require => Package['cobbler'],
+  }
+
+  file { '/etc/cobbler/preseed':
+    ensure => directory,
+    require => Package['cobbler'],
+  }
+
+  file { '/etc/cobbler/preseed/cisco-preseed':
+    content => template('cobbler/cisco.ks.erb'),
+    require => [ File['/etc/cobbler/preseed'], Package['cobbler'] ],
+  }
+
+
 }

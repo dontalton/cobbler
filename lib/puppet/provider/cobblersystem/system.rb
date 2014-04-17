@@ -82,9 +82,14 @@ Puppet::Type.type(:cobblersystem).provide(:system) do
 
   # sets kopts
   def kopts=(value)
-   cobbler('system', 'edit', '--name=' + @resource[:name], '--kopts=' + value)
-   @property_hash[:kopts]=(value)
+    cobbler('system', 'edit', '--name=' + @resource[:name], '--kopts=' + value)
+    @property_hash[:kopts]=(value)
   end 
+
+  def nameservers=(value)
+    cobbler('system', 'edit', '--name=' + @resource[:name], '--name-servers=' + value)
+    @property_hash[:nameservers]=(value)
+  end
 
   def power_address=(value)
     cobbler('system', 'edit', '--name=' + @resource[:name], '--power-address=' + value)
@@ -110,7 +115,6 @@ Puppet::Type.type(:cobblersystem).provide(:system) do
     cobbler('system', 'edit', '--name=' + @resource[:name], '--power-id=' + value)
     @property_hash[:power_id]=(value)
   end
-
 
   # sets interfaces
   def interfaces=(value)

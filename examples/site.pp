@@ -1,12 +1,8 @@
 include apache
 
 class { 'cobbler':
-  manage_dhcp     => '1',
-  manage_dns      => '1',
   dhcp_interfaces => 'eth1',
-  dhcp_option     => 'dnsmasq',
   domain          => 'cisco.com',
-  dhcp_use_isc    => false,
   server_ip       => '10.0.0.1',
   next_server_ip  => '10.0.0.1',
   nameservers     => '10.0.0.1',
@@ -21,7 +17,7 @@ cobblerprofile { 'precise-mini':
   ensure      => present,
   distro      => 'precise-mini',
   nameservers => $cobbler::nameservers,
-  kickstart   => '/var/lib/cobbler/kickstarts/ubuntu-server.preseed',
+  kickstart   => '/etc/cobbler/preseed/cisco-preseed',
 }
 
 package { 'yum-utils':
@@ -33,14 +29,16 @@ cobblersystem { 'precise-host':
   ensure     => present,
   profile    => 'precise-mini',
   interfaces => { 'eth1' => {
+                    ip_address => '10.0.0.2',
                     mac_address => '00:50:56:39:41:E7',
                     netmask    => '255.255.255.0',
                     gateway    => '10.0.0.1',
                   },
 
   },
+  nameservers => '8.8.8.8',
   netboot    => true,
-  kopts      => 'netcfg/confirm_static=true netcfg/get_ipaddress=2.5.1.254',
+  kopts      => "netcfg/disable_autoconfig=true netcfg/dhcp_failed=true netcfg/confirm_static=true partman-auto/disk=${bootdisk2}",
   hostname   => 'foo.cisco.com',
   require    => Service[$cobbler::service_name],
   power_address => '1.1.1.1',
