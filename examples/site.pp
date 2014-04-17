@@ -14,7 +14,7 @@ class { 'cobbler':
 
 cobbler::add_distro { 'precise-mini':
   arch    => 'x86_64',
-  isolink => 'http://archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/current/images/netboot/mini.iso',
+  isolink => 'http://10.0.0.50/ubuntu-server-precise-mini.iso',
 }
 
 cobblerprofile { 'precise-mini':

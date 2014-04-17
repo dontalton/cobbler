@@ -1,0 +1,208 @@
+[0;32mInfo: Loading facts in /etc/puppet/modules/concat/lib/facter/concat_basedir.rb[0m
+[0;32mInfo: Loading facts in /etc/puppet/modules/stdlib/lib/facter/facter_dot_d.rb[0m
+[0;32mInfo: Loading facts in /etc/puppet/modules/stdlib/lib/facter/puppet_vardir.rb[0m
+[0;32mInfo: Loading facts in /etc/puppet/modules/stdlib/lib/facter/root_home.rb[0m
+[0;32mInfo: Loading facts in /etc/puppet/modules/stdlib/lib/facter/pe_version.rb[0m
+[mNotice: Compiled catalog for ubuntu.cisco.com in environment production in 1.01 seconds[0m
+[0;32mInfo: Loading facts in /etc/puppet/modules/concat/lib/facter/concat_basedir.rb[0m
+[0;32mInfo: Loading facts in /etc/puppet/modules/stdlib/lib/facter/facter_dot_d.rb[0m
+[0;32mInfo: Loading facts in /etc/puppet/modules/stdlib/lib/facter/puppet_vardir.rb[0m
+[0;32mInfo: Loading facts in /etc/puppet/modules/stdlib/lib/facter/root_home.rb[0m
+[0;32mInfo: Loading facts in /etc/puppet/modules/stdlib/lib/facter/pe_version.rb[0m
+[0;32mInfo: Applying configuration version '1397750860'[0m
+[mNotice: /Stage[main]/Concat::Setup/File[/var/lib/puppet/concat]/ensure: created[0m
+[mNotice: /Stage[main]/Concat::Setup/File[/var/lib/puppet/concat/bin]/ensure: created[0m
+[mNotice: /Stage[main]/Concat::Setup/File[/var/lib/puppet/concat/bin/concatfragments.sh]/ensure: defined content as '{md5}e7aaa4c45316eb97d2d88b57334c4060'[0m
+[mNotice: /Stage[main]/Main/Package[yum-utils]/ensure: ensure changed 'purged' to 'present'[0m
+[mNotice: /Stage[main]/Apache/Package[httpd]/ensure: ensure changed 'purged' to 'present'[0m
+[0;32mInfo: /Stage[main]/Apache/Package[httpd]: Scheduling refresh of Class[Apache::Service][0m
+[mNotice: /Stage[main]/Apache/Exec[mkdir /etc/apache2/conf.d]/returns: executed successfully[0m
+[0;32mInfo: /Stage[main]/Apache/File[/etc/apache2/apache2.conf]: Filebucketed /etc/apache2/apache2.conf to puppet with sum da32fcc6a783acaebf0d74c17c726bf7[0m
+[mNotice: /Stage[main]/Apache/File[/etc/apache2/apache2.conf]/content: content changed '{md5}da32fcc6a783acaebf0d74c17c726bf7' to '{md5}9e67ec90636b0de7f45eae3b4b857217'[0m
+[0;32mInfo: /Stage[main]/Apache/File[/etc/apache2/apache2.conf]: Scheduling refresh of Class[Apache::Service][0m
+[mNotice: /Stage[main]/Apache/File[/etc/apache2/sites-enabled/000-default.conf]/ensure: removed[0m
+[mNotice: /Stage[main]/Apache::Mod::Mime/Apache::Mod[mime]/File[mime.load symlink]/target: target changed '../mods-available/mime.load' to '/etc/apache2/mods-available/mime.load'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Mime/Apache::Mod[mime]/File[mime.load symlink]: Scheduling refresh of Service[httpd][0m
+[0;32mInfo: /Stage[main]/Apache::Default_mods/Apache::Mod[authz_groupfile]/File[authz_groupfile.load]: Filebucketed /etc/apache2/mods-available/authz_groupfile.load to puppet with sum 97a3e14926ce7bf5f2d2a7b93ece648d[0m
+[mNotice: /Stage[main]/Apache::Default_mods/Apache::Mod[authz_groupfile]/File[authz_groupfile.load]/content: content changed '{md5}97a3e14926ce7bf5f2d2a7b93ece648d' to '{md5}bf972e82336c72b20d67d871ef77d4ce'[0m
+[0;32mInfo: /Stage[main]/Apache::Default_mods/Apache::Mod[authz_groupfile]/File[authz_groupfile.load]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Default_mods/Apache::Mod[authz_groupfile]/File[authz_groupfile.load symlink]/ensure: created[0m
+[0;32mInfo: /Stage[main]/Apache::Default_mods/Apache::Mod[authz_groupfile]/File[authz_groupfile.load symlink]: Scheduling refresh of Service[httpd][0m
+[0;32mInfo: /Stage[main]/Apache::Default_mods/Apache::Mod[authz_user]/File[authz_user.load]: Filebucketed /etc/apache2/mods-available/authz_user.load to puppet with sum bcf988f105564ec1e14b78df56a01cd8[0m
+[mNotice: /Stage[main]/Apache::Default_mods/Apache::Mod[authz_user]/File[authz_user.load]/content: content changed '{md5}bcf988f105564ec1e14b78df56a01cd8' to '{md5}69150f8246499e0135580d8cc16eaeab'[0m
+[0;32mInfo: /Stage[main]/Apache::Default_mods/Apache::Mod[authz_user]/File[authz_user.load]: Scheduling refresh of Service[httpd][0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Mime/File[mime.conf]: Filebucketed /etc/apache2/mods-available/mime.conf to puppet with sum 7369c2fd5edf2192edbd6d865b632ae5[0m
+[mNotice: /Stage[main]/Apache::Mod::Mime/File[mime.conf]/content: content changed '{md5}7369c2fd5edf2192edbd6d865b632ae5' to '{md5}2fa646fe615e44d137a5d629f868c107'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Mime/File[mime.conf]: Scheduling refresh of Service[httpd][0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Setenvif/File[setenvif.conf]: Filebucketed /etc/apache2/mods-available/setenvif.conf to puppet with sum 533f5f92761c2c24d6820f1d7d1c45ad[0m
+[mNotice: /Stage[main]/Apache::Mod::Setenvif/File[setenvif.conf]/content: content changed '{md5}533f5f92761c2c24d6820f1d7d1c45ad' to '{md5}c7ede4173da1915b7ec088201f030c28'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Setenvif/File[setenvif.conf]: Scheduling refresh of Service[httpd][0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Deflate/File[deflate.conf]: Filebucketed /etc/apache2/mods-available/deflate.conf to puppet with sum 6649a32153b9afdc53f6898b5a10a2d6[0m
+[mNotice: /Stage[main]/Apache::Mod::Deflate/File[deflate.conf]/content: content changed '{md5}6649a32153b9afdc53f6898b5a10a2d6' to '{md5}44d54f557a5612be8da04c49dd6da862'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Deflate/File[deflate.conf]: Scheduling refresh of Service[httpd][0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Negotiation/File[negotiation.conf]: Filebucketed /etc/apache2/mods-available/negotiation.conf to puppet with sum 443398efdd41085bc1a70047f6e61c95[0m
+[mNotice: /Stage[main]/Apache::Mod::Negotiation/File[negotiation.conf]/content: content changed '{md5}443398efdd41085bc1a70047f6e61c95' to '{md5}47284b5580b986a6ba32580b6ffb9fd7'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Negotiation/File[negotiation.conf]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Negotiation/Apache::Mod[negotiation]/File[negotiation.conf symlink]/target: target changed '../mods-available/negotiation.conf' to '/etc/apache2/mods-available/negotiation.conf'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Negotiation/Apache::Mod[negotiation]/File[negotiation.conf symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Alias/Apache::Mod[alias]/File[alias.load symlink]/target: target changed '../mods-available/alias.load' to '/etc/apache2/mods-available/alias.load'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Alias/Apache::Mod[alias]/File[alias.load symlink]: Scheduling refresh of Service[httpd][0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Dir/File[dir.conf]: Filebucketed /etc/apache2/mods-available/dir.conf to puppet with sum fe4bc5fa3b3cc7a241fe57f8fabc55a1[0m
+[mNotice: /Stage[main]/Apache::Mod::Dir/File[dir.conf]/content: content changed '{md5}fe4bc5fa3b3cc7a241fe57f8fabc55a1' to '{md5}c741d8ea840e6eb999d739eed47c69d7'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Dir/File[dir.conf]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Dir/Apache::Mod[dir]/File[dir.conf symlink]/target: target changed '../mods-available/dir.conf' to '/etc/apache2/mods-available/dir.conf'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Dir/Apache::Mod[dir]/File[dir.conf symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Setenvif/Apache::Mod[setenvif]/File[setenvif.load symlink]/target: target changed '../mods-available/setenvif.load' to '/etc/apache2/mods-available/setenvif.load'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Setenvif/Apache::Mod[setenvif]/File[setenvif.load symlink]: Scheduling refresh of Service[httpd][0m
+[0;32mInfo: /Stage[main]/Apache::Default_mods/Apache::Mod[auth_basic]/File[auth_basic.load]: Filebucketed /etc/apache2/mods-available/auth_basic.load to puppet with sum a92c34a3ce5e67e2ecbd272155ebe072[0m
+[mNotice: /Stage[main]/Apache::Default_mods/Apache::Mod[auth_basic]/File[auth_basic.load]/content: content changed '{md5}a92c34a3ce5e67e2ecbd272155ebe072' to '{md5}5eec35bb52e1ae9ff5eec602ed1d2374'[0m
+[0;32mInfo: /Stage[main]/Apache::Default_mods/Apache::Mod[auth_basic]/File[auth_basic.load]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Default_mods/Apache::Mod[auth_basic]/File[auth_basic.load symlink]/target: target changed '../mods-available/auth_basic.load' to '/etc/apache2/mods-available/auth_basic.load'[0m
+[0;32mInfo: /Stage[main]/Apache::Default_mods/Apache::Mod[auth_basic]/File[auth_basic.load symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache/Concat[/etc/apache2/ports.conf]/File[/var/lib/puppet/concat/_etc_apache2_ports.conf]/ensure: created[0m
+[0;32mInfo: /Stage[main]/Apache/Concat[/etc/apache2/ports.conf]/File[/var/lib/puppet/concat/_etc_apache2_ports.conf]: Scheduling refresh of Exec[concat_/etc/apache2/ports.conf][0m
+[mNotice: /Stage[main]/Apache/Concat[/etc/apache2/ports.conf]/File[/var/lib/puppet/concat/_etc_apache2_ports.conf/fragments.concat.out]/ensure: created[0m
+[mNotice: /Stage[main]/Apache::Default_mods/Apache::Mod[authn_file]/File[authn_file.load symlink]/target: target changed '../mods-available/authn_file.load' to '/etc/apache2/mods-available/authn_file.load'[0m
+[0;32mInfo: /Stage[main]/Apache::Default_mods/Apache::Mod[authn_file]/File[authn_file.load symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Dav/Apache::Mod[dav]/File[dav.load symlink]/ensure: created[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Dav/Apache::Mod[dav]/File[dav.load symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Wsgi/File[wsgi.conf]/ensure: defined content as '{md5}16494ba8ce7c39c430f45071456f018c'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Wsgi/File[wsgi.conf]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache/Concat[/etc/apache2/ports.conf]/File[/var/lib/puppet/concat/_etc_apache2_ports.conf/fragments.concat]/ensure: created[0m
+[mNotice: /Stage[main]/Apache::Mod::Dir/Apache::Mod[dir]/File[dir.load symlink]/target: target changed '../mods-available/dir.load' to '/etc/apache2/mods-available/dir.load'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Dir/Apache::Mod[dir]/File[dir.load symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Mime/Apache::Mod[mime]/File[mime.conf symlink]/target: target changed '../mods-available/mime.conf' to '/etc/apache2/mods-available/mime.conf'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Mime/Apache::Mod[mime]/File[mime.conf symlink]: Scheduling refresh of Service[httpd][0m
+[0;32mInfo: /etc/apache2/sites-enabled: Scheduling refresh of Class[Apache::Service][0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Dav_fs/Apache::Mod[dav_fs]/File[dav_fs.load]: Filebucketed /etc/apache2/mods-available/dav_fs.load to puppet with sum 17f662fd023dbaaab9d89f9a11ae58c1[0m
+[mNotice: /Stage[main]/Apache::Mod::Dav_fs/Apache::Mod[dav_fs]/File[dav_fs.load]/content: content changed '{md5}17f662fd023dbaaab9d89f9a11ae58c1' to '{md5}3fa14d6e9f9d8eb25d09ed4823508f6d'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Dav_fs/Apache::Mod[dav_fs]/File[dav_fs.load]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Dav_fs/Apache::Mod[dav_fs]/File[dav_fs.load symlink]/ensure: created[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Dav_fs/Apache::Mod[dav_fs]/File[dav_fs.load symlink]: Scheduling refresh of Service[httpd][0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Alias/File[alias.conf]: Filebucketed /etc/apache2/mods-available/alias.conf to puppet with sum c6e9f26152898c38e58211c8b362d5c3[0m
+[mNotice: /Stage[main]/Apache::Mod::Alias/File[alias.conf]/content: content changed '{md5}c6e9f26152898c38e58211c8b362d5c3' to '{md5}cb528041df274fb077800a8e2e64f94e'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Alias/File[alias.conf]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Wsgi/Apache::Mod[wsgi]/File[wsgi.conf symlink]/ensure: created[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Wsgi/Apache::Mod[wsgi]/File[wsgi.conf symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Alias/Apache::Mod[alias]/File[alias.conf symlink]/target: target changed '../mods-available/alias.conf' to '/etc/apache2/mods-available/alias.conf'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Alias/Apache::Mod[alias]/File[alias.conf symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Default_mods/Apache::Mod[authz_core]/File[authz_core.load symlink]/target: target changed '../mods-available/authz_core.load' to '/etc/apache2/mods-available/authz_core.load'[0m
+[0;32mInfo: /Stage[main]/Apache::Default_mods/Apache::Mod[authz_core]/File[authz_core.load symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Negotiation/Apache::Mod[negotiation]/File[negotiation.load symlink]/target: target changed '../mods-available/negotiation.load' to '/etc/apache2/mods-available/negotiation.load'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Negotiation/Apache::Mod[negotiation]/File[negotiation.load symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache/Concat[/etc/apache2/ports.conf]/File[/var/lib/puppet/concat/_etc_apache2_ports.conf/fragments]/ensure: created[0m
+[0;32mInfo: /Stage[main]/Apache/Concat[/etc/apache2/ports.conf]/File[/var/lib/puppet/concat/_etc_apache2_ports.conf/fragments]: Scheduling refresh of Exec[concat_/etc/apache2/ports.conf][0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Reqtimeout/File[reqtimeout.conf]: Filebucketed /etc/apache2/mods-available/reqtimeout.conf to puppet with sum 40b45155afb3d14263d12e6fc4a98513[0m
+[mNotice: /Stage[main]/Apache::Mod::Reqtimeout/File[reqtimeout.conf]/content: content changed '{md5}40b45155afb3d14263d12e6fc4a98513' to '{md5}81c51851ab7ee7942bef389dc7c0e985'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Reqtimeout/File[reqtimeout.conf]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Reqtimeout/Apache::Mod[reqtimeout]/File[reqtimeout.conf symlink]/ensure: created[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Reqtimeout/Apache::Mod[reqtimeout]/File[reqtimeout.conf symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Reqtimeout/Apache::Mod[reqtimeout]/File[reqtimeout.load symlink]/ensure: created[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Reqtimeout/Apache::Mod[reqtimeout]/File[reqtimeout.load symlink]: Scheduling refresh of Service[httpd][0m
+[0;32mInfo: /Stage[main]/Apache/File[/etc/apache2/sites-available/default-ssl.conf]: Filebucketed /etc/apache2/sites-available/default-ssl.conf to puppet with sum 62e941b4a0ff9e7794e82c98c8a846a2[0m
+[mNotice: /Stage[main]/Apache/File[/etc/apache2/sites-available/default-ssl.conf]/ensure: removed[0m
+[mNotice: /Stage[main]/Apache::Mod::Setenvif/Apache::Mod[setenvif]/File[setenvif.conf symlink]/target: target changed '../mods-available/setenvif.conf' to '/etc/apache2/mods-available/setenvif.conf'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Setenvif/Apache::Mod[setenvif]/File[setenvif.conf symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Proxy/Apache::Mod[proxy]/File[proxy.load symlink]/ensure: created[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Proxy/Apache::Mod[proxy]/File[proxy.load symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Deflate/Apache::Mod[deflate]/File[deflate.conf symlink]/target: target changed '../mods-available/deflate.conf' to '/etc/apache2/mods-available/deflate.conf'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Deflate/Apache::Mod[deflate]/File[deflate.conf symlink]: Scheduling refresh of Service[httpd][0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Deflate/Apache::Mod[deflate]/File[deflate.load]: Filebucketed /etc/apache2/mods-available/deflate.load to puppet with sum 6a7a23153796456ee919abdf728fd972[0m
+[mNotice: /Stage[main]/Apache::Mod::Deflate/Apache::Mod[deflate]/File[deflate.load]/content: content changed '{md5}6a7a23153796456ee919abdf728fd972' to '{md5}ac4540dd672556b07f900425751f745c'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Deflate/Apache::Mod[deflate]/File[deflate.load]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Deflate/Apache::Mod[deflate]/File[deflate.load symlink]/target: target changed '../mods-available/deflate.load' to '/etc/apache2/mods-available/deflate.load'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Deflate/Apache::Mod[deflate]/File[deflate.load symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Autoindex/Apache::Mod[autoindex]/File[autoindex.load symlink]/target: target changed '../mods-available/autoindex.load' to '/etc/apache2/mods-available/autoindex.load'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Autoindex/Apache::Mod[autoindex]/File[autoindex.load symlink]: Scheduling refresh of Service[httpd][0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Autoindex/File[autoindex.conf]: Filebucketed /etc/apache2/mods-available/autoindex.conf to puppet with sum bfba7d77669e02b869b92e98215d58fc[0m
+[mNotice: /Stage[main]/Apache::Mod::Autoindex/File[autoindex.conf]/content: content changed '{md5}bfba7d77669e02b869b92e98215d58fc' to '{md5}2421a3c6df32c7e38c2a7a22afdf5728'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Autoindex/File[autoindex.conf]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Autoindex/Apache::Mod[autoindex]/File[autoindex.conf symlink]/target: target changed '../mods-available/autoindex.conf' to '/etc/apache2/mods-available/autoindex.conf'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Autoindex/Apache::Mod[autoindex]/File[autoindex.conf symlink]: Scheduling refresh of Service[httpd][0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Proxy/File[proxy.conf]: Filebucketed /etc/apache2/mods-available/proxy.conf to puppet with sum b516d96935974214588d525edd7aed6d[0m
+[mNotice: /Stage[main]/Apache::Mod::Proxy/File[proxy.conf]/content: content changed '{md5}b516d96935974214588d525edd7aed6d' to '{md5}9eab682d8c4c89abd0ff20c1a60b908d'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Proxy/File[proxy.conf]: Scheduling refresh of Service[httpd][0m
+[0;32mInfo: /Stage[main]/Apache::Default_mods/Apache::Mod[authz_host]/File[authz_host.load]: Filebucketed /etc/apache2/mods-available/authz_host.load to puppet with sum f529587409471e3feb62256bccaf538a[0m
+[mNotice: /Stage[main]/Apache::Default_mods/Apache::Mod[authz_host]/File[authz_host.load]/content: content changed '{md5}f529587409471e3feb62256bccaf538a' to '{md5}4b8162e3e3a58d1dc2222e2ad352bd93'[0m
+[0;32mInfo: /Stage[main]/Apache::Default_mods/Apache::Mod[authz_host]/File[authz_host.load]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Default_mods/Apache::Mod[authz_host]/File[authz_host.load symlink]/target: target changed '../mods-available/authz_host.load' to '/etc/apache2/mods-available/authz_host.load'[0m
+[0;32mInfo: /Stage[main]/Apache::Default_mods/Apache::Mod[authz_host]/File[authz_host.load symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Proxy/Apache::Mod[proxy]/File[proxy.conf symlink]/ensure: created[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Proxy/Apache::Mod[proxy]/File[proxy.conf symlink]: Scheduling refresh of Service[httpd][0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Proxy_http/Apache::Mod[proxy_http]/File[proxy_http.load]: Filebucketed /etc/apache2/mods-available/proxy_http.load to puppet with sum 161b514c355c6daa95f11371fb9c184c[0m
+[mNotice: /Stage[main]/Apache::Mod::Proxy_http/Apache::Mod[proxy_http]/File[proxy_http.load]/content: content changed '{md5}161b514c355c6daa95f11371fb9c184c' to '{md5}2373b5392476521a14e84a444647f640'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Proxy_http/Apache::Mod[proxy_http]/File[proxy_http.load]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Proxy_http/Apache::Mod[proxy_http]/File[proxy_http.load symlink]/ensure: created[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Proxy_http/Apache::Mod[proxy_http]/File[proxy_http.load symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Default_mods/Apache::Mod[filter]/File[filter.load symlink]/target: target changed '../mods-available/filter.load' to '/etc/apache2/mods-available/filter.load'[0m
+[0;32mInfo: /Stage[main]/Apache::Default_mods/Apache::Mod[filter]/File[filter.load symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Worker/Apache::Mpm[worker]/File[/etc/apache2/mods-available/worker.load]/ensure: defined content as '{md5}3064ef75f030fbf76986f6f073beb113'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Worker/Apache::Mpm[worker]/File[/etc/apache2/mods-available/worker.load]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Worker/Apache::Mpm[worker]/File[/etc/apache2/mods-enabled/worker.load]/ensure: created[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Worker/Apache::Mpm[worker]/File[/etc/apache2/mods-enabled/worker.load]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Worker/File[/etc/apache2/mods-available/worker.conf]/ensure: defined content as '{md5}8b152143a27f5bf9aafdcd81059ea91c'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Worker/File[/etc/apache2/mods-available/worker.conf]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Worker/Apache::Mpm[worker]/File[/etc/apache2/mods-enabled/worker.conf]/ensure: created[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Worker/Apache::Mpm[worker]/File[/etc/apache2/mods-enabled/worker.conf]: Scheduling refresh of Service[httpd][0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Cgid/File[cgid.conf]: Filebucketed /etc/apache2/mods-available/cgid.conf to puppet with sum e8a2836392051bde889cf9c137058273[0m
+[mNotice: /Stage[main]/Apache::Mod::Cgid/File[cgid.conf]/content: content changed '{md5}e8a2836392051bde889cf9c137058273' to '{md5}7dffbb5823bcbb9ab4d3e67ab14d38a0'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Cgid/File[cgid.conf]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Cgid/Apache::Mod[cgid]/File[cgid.conf symlink]/ensure: created[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Cgid/Apache::Mod[cgid]/File[cgid.conf symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Cgid/Apache::Mod[cgid]/File[cgid.load symlink]/ensure: created[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Cgid/Apache::Mod[cgid]/File[cgid.load symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Default_mods/Apache::Mod[env]/File[env.load symlink]/target: target changed '../mods-available/env.load' to '/etc/apache2/mods-available/env.load'[0m
+[0;32mInfo: /Stage[main]/Apache::Default_mods/Apache::Mod[env]/File[env.load symlink]: Scheduling refresh of Service[httpd][0m
+[0;32mInfo: /Stage[main]/Apache/File[/etc/apache2/sites-available/000-default.conf]: Filebucketed /etc/apache2/sites-available/000-default.conf to puppet with sum f3066f67070ab9b1ad9bab81ca05330a[0m
+[mNotice: /Stage[main]/Apache/File[/etc/apache2/sites-available/000-default.conf]/ensure: removed[0m
+[0;32mInfo: /etc/apache2/sites-available: Scheduling refresh of Class[Apache::Service][0m
+[mNotice: /Stage[main]/Apache/Apache::Vhost[default]/File[15-default.conf]/ensure: created[0m
+[0;32mInfo: /Stage[main]/Apache/Apache::Vhost[default]/File[15-default.conf]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache/Apache::Vhost[default]/File[15-default.conf symlink]/ensure: created[0m
+[0;32mInfo: /Stage[main]/Apache/Apache::Vhost[default]/File[15-default.conf symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache/Apache::Vhost[default]/Apache::Namevirtualhost[*:80]/Concat::Fragment[NameVirtualHost *:80]/File[/var/lib/puppet/concat/_etc_apache2_ports.conf/fragments/10_NameVirtualHost *:80]/ensure: created[0m
+[0;32mInfo: /Stage[main]/Apache/Apache::Vhost[default]/Apache::Namevirtualhost[*:80]/Concat::Fragment[NameVirtualHost *:80]/File[/var/lib/puppet/concat/_etc_apache2_ports.conf/fragments/10_NameVirtualHost *:80]: Scheduling refresh of Exec[concat_/etc/apache2/ports.conf][0m
+[mNotice: /Stage[main]/Apache/Apache::Vhost[default]/Apache::Listen[80]/Concat::Fragment[Listen 80]/File[/var/lib/puppet/concat/_etc_apache2_ports.conf/fragments/10_Listen 80]/ensure: created[0m
+[0;32mInfo: /Stage[main]/Apache/Apache::Vhost[default]/Apache::Listen[80]/Concat::Fragment[Listen 80]/File[/var/lib/puppet/concat/_etc_apache2_ports.conf/fragments/10_Listen 80]: Scheduling refresh of Exec[concat_/etc/apache2/ports.conf][0m
+[mNotice: /Stage[main]/Apache/Concat::Fragment[Apache ports header]/File[/var/lib/puppet/concat/_etc_apache2_ports.conf/fragments/10_Apache ports header]/ensure: created[0m
+[0;32mInfo: /Stage[main]/Apache/Concat::Fragment[Apache ports header]/File[/var/lib/puppet/concat/_etc_apache2_ports.conf/fragments/10_Apache ports header]: Scheduling refresh of Exec[concat_/etc/apache2/ports.conf][0m
+[mNotice: /Stage[main]/Apache/Concat[/etc/apache2/ports.conf]/Exec[concat_/etc/apache2/ports.conf]/returns: executed successfully[0m
+[mNotice: /Stage[main]/Apache/Concat[/etc/apache2/ports.conf]/Exec[concat_/etc/apache2/ports.conf]: Triggered 'refresh' from 5 events[0m
+[0;32mInfo: /Stage[main]/Apache/Concat[/etc/apache2/ports.conf]/File[/etc/apache2/ports.conf]: Filebucketed /etc/apache2/ports.conf to puppet with sum a961f23471d985c2b819b652b7f64321[0m
+[mNotice: /Stage[main]/Apache/Concat[/etc/apache2/ports.conf]/File[/etc/apache2/ports.conf]/content: content changed '{md5}a961f23471d985c2b819b652b7f64321' to '{md5}ac3b658e433eba85f350d4068b0ef826'[0m
+[0;32mInfo: Concat[/etc/apache2/ports.conf]: Scheduling refresh of Class[Apache::Service][0m
+[mNotice: /Stage[main]/Apache::Mod::Wsgi/Apache::Mod[wsgi]/Package[libapache2-mod-wsgi]/ensure: ensure changed 'purged' to 'present'[0m
+[mNotice: /Stage[main]/Apache::Mod::Wsgi/Apache::Mod[wsgi]/File[wsgi.load symlink]/target: target changed '../mods-available/wsgi.load' to '/etc/apache2/mods-available/wsgi.load'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Wsgi/Apache::Mod[wsgi]/File[wsgi.load symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Cobbler/File[/etc/apache2/conf.d/cobbler.conf]/ensure: defined content as '{md5}a65078ff78aa2a8d53585fe2392db1ed'[0m
+[mNotice: /Stage[main]/Cobbler/File[/distro]/ensure: created[0m
+[mNotice: /Stage[main]/Cobbler/File[/etc/apache2/conf.d/distros.conf]/ensure: defined content as '{md5}08639dd42f4bc9e0642487f2af00db2f'[0m
+[mNotice: /Stage[main]/Cobbler/File[/etc/apache2/conf.d/proxy_cobbler.conf]/ensure: defined content as '{md5}962dde7dbdc02bda9bf7dc0db4c6dfc6'[0m
+[0;32mInfo: /Stage[main]/Cobbler/File[/etc/apache2/conf.d/proxy_cobbler.conf]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Cobbler/File[/distro/kickstarts]/ensure: created[0m
+[mNotice: /Stage[main]/Main/Cobbler::Add_distro[precise-mini]/File[/distro/kickstarts/precise-mini.ks]/ensure: created[0m
+[mNotice: /Stage[main]/Cobbler/Package[syslinux]/ensure: ensure changed 'purged' to 'present'[0m
+[mNotice: /Stage[main]/Cobbler/Package[dnsmasq]/ensure: ensure changed 'purged' to 'present'[0m
+[mNotice: /Stage[main]/Cobbler/File[/etc/cobbler/dnsmasq.template]: Dependency Package[cobbler] has failures: true[0m
+[mNotice: /Stage[main]/Cobbler/File[/etc/cobbler/modules.conf]: Dependency Package[cobbler] has failures: true[0m
+[mNotice: /Stage[main]/Cobbler/File[/etc/cobbler/settings]: Dependency Package[cobbler] has failures: true[0m
+[mNotice: /Stage[main]/Cobbler/Service[cobbler]: Dependency Package[cobbler] has failures: true[0m
+[mNotice: /Stage[main]/Cobbler/Exec[cobblersync]: Dependency Package[cobbler] has failures: true[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Dav_fs/File[dav_fs.conf]: Filebucketed /etc/apache2/mods-available/dav_fs.conf to puppet with sum 162db96239f13b5416f369b6306d9db6[0m
+[mNotice: /Stage[main]/Apache::Mod::Dav_fs/File[dav_fs.conf]/content: content changed '{md5}162db96239f13b5416f369b6306d9db6' to '{md5}e36e2951cff0d4df331652ca6fccdb77'[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Dav_fs/File[dav_fs.conf]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Mod::Dav_fs/Apache::Mod[dav_fs]/File[dav_fs.conf symlink]/ensure: created[0m
+[0;32mInfo: /Stage[main]/Apache::Mod::Dav_fs/Apache::Mod[dav_fs]/File[dav_fs.conf symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Default_mods/Apache::Mod[authz_user]/File[authz_user.load symlink]/target: target changed '../mods-available/authz_user.load' to '/etc/apache2/mods-available/authz_user.load'[0m
+[0;32mInfo: /Stage[main]/Apache::Default_mods/Apache::Mod[authz_user]/File[authz_user.load symlink]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache/File[/etc/apache2/mods-enabled/mpm_event.conf]/ensure: removed[0m
+[mNotice: /Stage[main]/Apache/File[/etc/apache2/mods-enabled/authn_core.load]/ensure: removed[0m
+[mNotice: /Stage[main]/Apache/File[/etc/apache2/mods-enabled/status.load]/ensure: removed[0m
+[mNotice: /Stage[main]/Apache/File[/etc/apache2/mods-enabled/access_compat.load]/ensure: removed[0m
+[mNotice: /Stage[main]/Apache/File[/etc/apache2/mods-enabled/status.conf]/ensure: removed[0m
+[mNotice: /Stage[main]/Apache/File[/etc/apache2/mods-enabled/mpm_event.load]/ensure: removed[0m
+[0;32mInfo: /etc/apache2/mods-enabled: Scheduling refresh of Class[Apache::Service][0m
+[0;32mInfo: Class[Apache::Service]: Scheduling refresh of Service[httpd][0m
+[mNotice: /Stage[main]/Apache::Service/Service[httpd]: Triggered 'refresh' from 61 events[0m
+[0;32mInfo: Creating state file /var/lib/puppet/state/state.yaml[0m
+[mNotice: Finished catalog run in 50.41 seconds[0m
