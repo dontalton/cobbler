@@ -20,6 +20,7 @@ cobblersystem { 'test.domain.com':
   netboot    => false,
   comment    => 'my system description',
   kopts      => 'kernel options',
+  power_address => 'the system's managed power address',
 }
 
 "
@@ -90,10 +91,35 @@ cobblersystem { 'test.domain.com':
     end
   end
 
+  # these really should have some data validation
   newproperty(:kopts) do
     desc 'kernel options'
     defaultto ''
-    # this really should have some data validation
+  end
+
+  newproperty(:power_address) do
+    desc 'power address'
+    defaultto ''
+  end
+  
+  newproperty(:power_type) do
+    desc 'power type'
+    defaultto 'cisco_ucs'
+  end
+
+  newproperty(:power_user) do
+    desc 'power user'
+    defaultto ''
+  end
+
+  newproperty(:power_password) do
+    desc 'power password'
+    defaultto ''
+  end
+
+  newproperty(:power_id) do
+    desc 'power id'
+    defaultto ''
   end
 
   newproperty(:hostname) do

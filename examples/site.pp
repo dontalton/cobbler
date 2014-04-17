@@ -43,4 +43,8 @@ cobblersystem { 'precise-host':
   kopts      => 'netcfg/confirm_static=true netcfg/get_ipaddress=2.5.1.254',
   hostname   => 'foo.cisco.com',
   require    => Service[$cobbler::service_name],
+  power_address => '1.1.1.1',
+  power_user => 'don',
+  power_password => 'mypass',
+  power_id => 'randomid',
 }

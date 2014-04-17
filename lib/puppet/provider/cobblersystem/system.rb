@@ -34,7 +34,12 @@ Puppet::Type.type(:cobblersystem).provide(:system) do
         :gateway        => member['gateway'],
         :netboot        => member['netboot_enabled'].to_s,
         :comment        => member['comment'],
-        :kopts          => member['kopts']
+        :kopts          => member['kopts'],
+        :power_address  => member['power_address'],
+        :power_type     => member['power_type'],
+        :power_user     => member['power_user'],
+        :power_password => member['power_password'],
+        :power_id       => member['power_id'],
       )
     end
     keys
@@ -80,6 +85,32 @@ Puppet::Type.type(:cobblersystem).provide(:system) do
    cobbler('system', 'edit', '--name=' + @resource[:name], '--kopts=' + value)
    @property_hash[:kopts]=(value)
   end 
+
+  def power_address=(value)
+    cobbler('system', 'edit', '--name=' + @resource[:name], '--power-address=' + value)
+    @property_hash[:power_address]=(value)
+  end
+
+  def power_type=(value)
+    cobbler('system', 'edit', '--name=' + @resource[:name], '--power-type=' + value)
+    @property_hash[:power_type]=(value)
+  end
+
+  def power_user=(value)
+    cobbler('system', 'edit', '--name=' + @resource[:name], '--power-user=' + value)
+    @property_hash[:power_user]=(value)
+  end
+
+  def power_password=(value)
+    cobbler('system', 'edit', '--name=' + @resource[:name], '--power-pass=' + value)
+    @property_hash[:power_password]=(value)
+  end
+
+  def power_id=(value)
+    cobbler('system', 'edit', '--name=' + @resource[:name], '--power-id=' + value)
+    @property_hash[:power_id]=(value)
+  end
+
 
   # sets interfaces
   def interfaces=(value)
