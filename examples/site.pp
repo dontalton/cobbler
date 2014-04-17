@@ -34,12 +34,12 @@ cobblersystem { 'precise-host':
   profile    => 'precise-mini',
   interfaces => { 'eth0' => {
                     ip_address => '10.0.0.2',
-                    mac_address => '08:00:27:B0:3A:E0',
+                    mac_address => '08:00:27:70:CB:8E',
                     netmask   => '255.255.255.0',
                   },
                   'eth1' => {
                     ip_address => '10.0.0.3',
-                    mac_address => '08:00:27:49:DE:4A',
+                    mac_address => '08:00:27:0B:42:5B',
                     netmask => '255.255.255.0',
                   },
   },
