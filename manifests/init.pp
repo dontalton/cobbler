@@ -231,7 +231,7 @@ class cobbler (
         mode    => '0644',
         content => template('cobbler/dnsmasq.template'),
         require => [ Package[$dhcp_package_dnsmasq], Package['cobbler'] ],
-        notify  => Exec['cobblersync'],
+#        notify  => Exec['cobblersync'],
       }
     }
   }
