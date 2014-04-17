@@ -5,20 +5,21 @@
 class cobbler::params {
   case $::osfamily {
     'RedHat': {
-      $service_name     = 'cobblerd'
-      $apache_service   = 'httpd'
-      $apache_conf_dir  = '/etc/httpd/conf.d'
-      $dhcp_package_isc = 'dhcp'
+      $service_name         = 'cobblerd'
+      $apache_service       = 'httpd'
+      $apache_conf_dir      = '/etc/httpd/conf.d'
+      $dhcp_package_isc     = 'dhcp'
       $dhcp_package_dnsmasq = 'rhel_dnsmasq_package'
       $tftpd_package        = 'tftp-server'
     }
     'Debian': {
-      $service_name    = 'cobbler'
-      $apache_service  = 'apache2'
-      $apache_conf_dir = '/etc/apache2/conf.d'
-      $dhcp_package_isc = 'isc-dhcp-server'
+      $service_name         = 'cobbler'
+      $apache_service       = 'apache2'
+      $apache_conf_dir      = '/etc/apache2/conf.d'
+      $dhcp_package_isc     = 'isc-dhcp-server'
       $dhcp_package_dnsmasq = 'dnsmasq'
       $tftpd_package        = 'tftpd'
+      $tftpd_option         = 'in_tftpd'
     }
     default: {
       fail("Unsupported osfamily: ${::osfamily} operatingsystem: ${::operatingsystem}, module ${module_name} currently only supports osfamily RedHat")

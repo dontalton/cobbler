@@ -19,6 +19,8 @@ cobblersystem { 'test.domain.com':
   hostname   => 'test.domain.com',
   netboot    => false,
   comment    => 'my system description',
+  kopts      => 'kernel options',
+  power_address => 'the system's managed power address',
 }
 
 "
@@ -87,6 +89,37 @@ cobblersystem { 'test.domain.com':
         raise ArgumentError, "%s is not a valid IP address." % value unless value =~ /\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}/
       end
     end
+  end
+
+  # these really should have some data validation
+  newproperty(:kopts) do
+    desc 'kernel options'
+    defaultto ''
+  end
+
+  newproperty(:power_address) do
+    desc 'power address'
+    defaultto ''
+  end
+  
+  newproperty(:power_type) do
+    desc 'power type'
+    defaultto 'cisco_ucs'
+  end
+
+  newproperty(:power_user) do
+    desc 'power user'
+    defaultto ''
+  end
+
+  newproperty(:power_password) do
+    desc 'power password'
+    defaultto ''
+  end
+
+  newproperty(:power_id) do
+    desc 'power id'
+    defaultto ''
   end
 
   newproperty(:hostname) do

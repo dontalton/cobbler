@@ -180,12 +180,6 @@ class cobbler (
     content => template('cobbler/cobbler.conf.erb'),
   }
 
-  # cobbler sync command
-  exec { 'cobblersync':
-    command     => '/usr/bin/cobbler sync',
-    refreshonly => true,
-  }
-
   # purge resources
   if $purge_distro == true {
     resources { 'cobblerdistro':  purge => true, }
@@ -217,12 +211,11 @@ class cobbler (
         mode    => '0644',
         content => template('cobbler/dhcp.template.erb'),
         require => Package['cobbler'],
-        notify  => Exec['cobblersync'],
       }
     } else {
       package { $dhcp_package_dnsmasq:
         ensure  => present,
-        require => Package['syslinux'],
+        require => [ Package['cobbler'], Package['syslinux'] ],
       }
       file { '/etc/cobbler/dnsmasq.template':
         ensure  => present,
@@ -230,8 +223,7 @@ class cobbler (
         group   => root,
         mode    => '0644',
         content => template('cobbler/dnsmasq.template'),
-        require => Package['cobbler'],
-        notify  => Exec['cobblersync'],
+        require => [ Package[$dhcp_package_dnsmasq], Package['cobbler'] ],
       }
     }
   }
