@@ -40,7 +40,7 @@ cobblersystem { 'precise-host':
 
   },
   netboot    => true,
-  kopts      => 'someshit=someothershit onething=something',
+  kopts      => 'netcfg/confirm_static=true netcfg/get_ipaddress=2.5.1.254',
   hostname   => 'foo.cisco.com',
   require    => Service[$cobbler::service_name],
 }

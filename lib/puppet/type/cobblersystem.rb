@@ -93,6 +93,7 @@ cobblersystem { 'test.domain.com':
   newproperty(:kopts) do
     desc 'kernel options'
     defaultto ''
+    # this really should have some data validation
   end
 
   newproperty(:hostname) do
