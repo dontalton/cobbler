@@ -3,13 +3,13 @@
 [0;32mInfo: Loading facts in /etc/puppet/modules/stdlib/lib/facter/puppet_vardir.rb[0m
 [0;32mInfo: Loading facts in /etc/puppet/modules/stdlib/lib/facter/root_home.rb[0m
 [0;32mInfo: Loading facts in /etc/puppet/modules/stdlib/lib/facter/pe_version.rb[0m
-[mNotice: Compiled catalog for ubuntu.cisco.com in environment production in 1.01 seconds[0m
+[mNotice: Compiled catalog for ubuntu.cisco.com in environment production in 1.02 seconds[0m
 [0;32mInfo: Loading facts in /etc/puppet/modules/concat/lib/facter/concat_basedir.rb[0m
 [0;32mInfo: Loading facts in /etc/puppet/modules/stdlib/lib/facter/facter_dot_d.rb[0m
 [0;32mInfo: Loading facts in /etc/puppet/modules/stdlib/lib/facter/puppet_vardir.rb[0m
 [0;32mInfo: Loading facts in /etc/puppet/modules/stdlib/lib/facter/root_home.rb[0m
 [0;32mInfo: Loading facts in /etc/puppet/modules/stdlib/lib/facter/pe_version.rb[0m
-[0;32mInfo: Applying configuration version '1397750860'[0m
+[0;32mInfo: Applying configuration version '1397751244'[0m
 [mNotice: /Stage[main]/Concat::Setup/File[/var/lib/puppet/concat]/ensure: created[0m
 [mNotice: /Stage[main]/Concat::Setup/File[/var/lib/puppet/concat/bin]/ensure: created[0m
 [mNotice: /Stage[main]/Concat::Setup/File[/var/lib/puppet/concat/bin/concatfragments.sh]/ensure: defined content as '{md5}e7aaa4c45316eb97d2d88b57334c4060'[0m
@@ -205,4 +205,4 @@
 [0;32mInfo: Class[Apache::Service]: Scheduling refresh of Service[httpd][0m
 [mNotice: /Stage[main]/Apache::Service/Service[httpd]: Triggered 'refresh' from 61 events[0m
 [0;32mInfo: Creating state file /var/lib/puppet/state/state.yaml[0m
-[mNotice: Finished catalog run in 50.41 seconds[0m
+[mNotice: Finished catalog run in 44.08 seconds[0m

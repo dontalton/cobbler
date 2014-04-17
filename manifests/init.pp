@@ -222,7 +222,7 @@ class cobbler (
     } else {
       package { $dhcp_package_dnsmasq:
         ensure  => present,
-        require => Package['syslinux'],
+        require => [ Package['cobbler'], Package['syslinux'] ],
       }
       file { '/etc/cobbler/dnsmasq.template':
         ensure  => present,
