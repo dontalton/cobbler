@@ -19,6 +19,7 @@ cobblersystem { 'test.domain.com':
   hostname   => 'test.domain.com',
   netboot    => false,
   comment    => 'my system description',
+  kopts      => 'kernel options',
 }
 
 "
@@ -87,6 +88,11 @@ cobblersystem { 'test.domain.com':
         raise ArgumentError, "%s is not a valid IP address." % value unless value =~ /\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}/
       end
     end
+  end
+
+  newproperty(:kopts) do
+    desc 'kernel options'
+    defaultto ''
   end
 
   newproperty(:hostname) do

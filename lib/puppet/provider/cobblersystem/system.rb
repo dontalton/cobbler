@@ -33,7 +33,8 @@ Puppet::Type.type(:cobblersystem).provide(:system) do
         :hostname       => member['hostname'],
         :gateway        => member['gateway'],
         :netboot        => member['netboot_enabled'].to_s,
-        :comment        => member['comment']
+        :comment        => member['comment'],
+        :kopts          => member['kopts']
       )
     end
     keys
@@ -73,6 +74,12 @@ Puppet::Type.type(:cobblersystem).provide(:system) do
     cobbler('system', 'edit', '--name=' + @resource[:name], tmparg)
     @property_hash[:netboot]=(value)
   end
+
+  # sets kopts
+  def kopts=(value)
+   cobbler('system', 'edit', '--name=' + @resource[:name], '--kopts=' + value)
+   @property_hash[:kopts]=(value)
+  end 
 
   # sets interfaces
   def interfaces=(value)

@@ -32,18 +32,15 @@ package { 'yum-utils':
 cobblersystem { 'precise-host':
   ensure     => present,
   profile    => 'precise-mini',
-  interfaces => { 'eth0' => {
-                    ip_address => '10.0.0.2',
-                    mac_address => '08:00:27:70:CB:8E',
-                    netmask   => '255.255.255.0',
+  interfaces => { 'eth1' => {
+                    mac_address => '00:50:56:39:41:E7',
+                    netmask    => '255.255.255.0',
+                    gateway    => '10.0.0.1',
                   },
-                  'eth1' => {
-                    ip_address => '10.0.0.3',
-                    mac_address => '08:00:27:0B:42:5B',
-                    netmask => '255.255.255.0',
-                  },
+
   },
   netboot    => true,
+  kopts      => 'someshit=someothershit onething=something',
   hostname   => 'foo.cisco.com',
   require    => Service[$cobbler::service_name],
 }
