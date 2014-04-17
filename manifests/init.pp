@@ -230,7 +230,7 @@ class cobbler (
         group   => root,
         mode    => '0644',
         content => template('cobbler/dnsmasq.template'),
-        require => Package['dnsmasq'],
+        require => Package['cobbler'],
         notify  => Exec['cobblersync'],
       }
     }
