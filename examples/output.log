@@ -3,13 +3,13 @@
 [0;32mInfo: Loading facts in /etc/puppet/modules/stdlib/lib/facter/puppet_vardir.rb[0m
 [0;32mInfo: Loading facts in /etc/puppet/modules/stdlib/lib/facter/root_home.rb[0m
 [0;32mInfo: Loading facts in /etc/puppet/modules/stdlib/lib/facter/pe_version.rb[0m
-[mNotice: Compiled catalog for ubuntu.cisco.com in environment production in 1.02 seconds[0m
+[mNotice: Compiled catalog for ubuntu.cisco.com in environment production in 0.97 seconds[0m
 [0;32mInfo: Loading facts in /etc/puppet/modules/concat/lib/facter/concat_basedir.rb[0m
 [0;32mInfo: Loading facts in /etc/puppet/modules/stdlib/lib/facter/facter_dot_d.rb[0m
 [0;32mInfo: Loading facts in /etc/puppet/modules/stdlib/lib/facter/puppet_vardir.rb[0m
 [0;32mInfo: Loading facts in /etc/puppet/modules/stdlib/lib/facter/root_home.rb[0m
 [0;32mInfo: Loading facts in /etc/puppet/modules/stdlib/lib/facter/pe_version.rb[0m
-[0;32mInfo: Applying configuration version '1397751244'[0m
+[0;32mInfo: Applying configuration version '1397752241'[0m
 [mNotice: /Stage[main]/Concat::Setup/File[/var/lib/puppet/concat]/ensure: created[0m
 [mNotice: /Stage[main]/Concat::Setup/File[/var/lib/puppet/concat/bin]/ensure: created[0m
 [mNotice: /Stage[main]/Concat::Setup/File[/var/lib/puppet/concat/bin/concatfragments.sh]/ensure: defined content as '{md5}e7aaa4c45316eb97d2d88b57334c4060'[0m
@@ -182,12 +182,19 @@
 [mNotice: /Stage[main]/Cobbler/File[/distro/kickstarts]/ensure: created[0m
 [mNotice: /Stage[main]/Main/Cobbler::Add_distro[precise-mini]/File[/distro/kickstarts/precise-mini.ks]/ensure: created[0m
 [mNotice: /Stage[main]/Cobbler/Package[syslinux]/ensure: ensure changed 'purged' to 'present'[0m
+[mNotice: /Stage[main]/Cobbler/Package[cobbler]/ensure: ensure changed 'purged' to 'present'[0m
+[0;32mInfo: /Stage[main]/Cobbler/File[/etc/cobbler/dnsmasq.template]: Filebucketed /etc/cobbler/dnsmasq.template to puppet with sum 1d132ffeffca7d8afcca8c857a877d73[0m
+[mNotice: /Stage[main]/Cobbler/File[/etc/cobbler/dnsmasq.template]/content: content changed '{md5}1d132ffeffca7d8afcca8c857a877d73' to '{md5}d23b836f2f932efb2a3aec547a4d8b8c'[0m
+[0;32mInfo: /Stage[main]/Cobbler/File[/etc/cobbler/dnsmasq.template]: Scheduling refresh of Exec[cobblersync][0m
+[0;32mInfo: /Stage[main]/Cobbler/File[/etc/cobbler/modules.conf]: Filebucketed /etc/cobbler/modules.conf to puppet with sum 7d8e01fd02b3712983fc120c3a9fa8e2[0m
+[mNotice: /Stage[main]/Cobbler/File[/etc/cobbler/modules.conf]/content: content changed '{md5}7d8e01fd02b3712983fc120c3a9fa8e2' to '{md5}6bc954a55795d54ccc07a8f777dc75fd'[0m
+[0;32mInfo: /Stage[main]/Cobbler/File[/etc/cobbler/modules.conf]: Scheduling refresh of Service[cobbler][0m
+[0;32mInfo: /Stage[main]/Cobbler/File[/etc/cobbler/settings]: Filebucketed /etc/cobbler/settings to puppet with sum 090770bb433e6858a021731cad3081be[0m
+[mNotice: /Stage[main]/Cobbler/File[/etc/cobbler/settings]/content: content changed '{md5}090770bb433e6858a021731cad3081be' to '{md5}8cb415a334b958693ff4cd5be7109417'[0m
+[0;32mInfo: /Stage[main]/Cobbler/File[/etc/cobbler/settings]: Scheduling refresh of Service[cobbler][0m
 [mNotice: /Stage[main]/Cobbler/Package[dnsmasq]/ensure: ensure changed 'purged' to 'present'[0m
-[mNotice: /Stage[main]/Cobbler/File[/etc/cobbler/dnsmasq.template]: Dependency Package[cobbler] has failures: true[0m
-[mNotice: /Stage[main]/Cobbler/File[/etc/cobbler/modules.conf]: Dependency Package[cobbler] has failures: true[0m
-[mNotice: /Stage[main]/Cobbler/File[/etc/cobbler/settings]: Dependency Package[cobbler] has failures: true[0m
-[mNotice: /Stage[main]/Cobbler/Service[cobbler]: Dependency Package[cobbler] has failures: true[0m
-[mNotice: /Stage[main]/Cobbler/Exec[cobblersync]: Dependency Package[cobbler] has failures: true[0m
+[mNotice: /Stage[main]/Cobbler/Service[cobbler]: Triggered 'refresh' from 2 events[0m
+[mNotice: /Stage[main]/Cobbler/Exec[cobblersync]/returns: cobblerd does not appear to be running/accessible[0m
 [0;32mInfo: /Stage[main]/Apache::Mod::Dav_fs/File[dav_fs.conf]: Filebucketed /etc/apache2/mods-available/dav_fs.conf to puppet with sum 162db96239f13b5416f369b6306d9db6[0m
 [mNotice: /Stage[main]/Apache::Mod::Dav_fs/File[dav_fs.conf]/content: content changed '{md5}162db96239f13b5416f369b6306d9db6' to '{md5}e36e2951cff0d4df331652ca6fccdb77'[0m
 [0;32mInfo: /Stage[main]/Apache::Mod::Dav_fs/File[dav_fs.conf]: Scheduling refresh of Service[httpd][0m
@@ -196,6 +203,8 @@
 [mNotice: /Stage[main]/Apache::Default_mods/Apache::Mod[authz_user]/File[authz_user.load symlink]/target: target changed '../mods-available/authz_user.load' to '/etc/apache2/mods-available/authz_user.load'[0m
 [0;32mInfo: /Stage[main]/Apache::Default_mods/Apache::Mod[authz_user]/File[authz_user.load symlink]: Scheduling refresh of Service[httpd][0m
 [mNotice: /Stage[main]/Apache/File[/etc/apache2/mods-enabled/mpm_event.conf]/ensure: removed[0m
+[mNotice: /Stage[main]/Apache/File[/etc/apache2/mods-enabled/python.load]/ensure: removed[0m
+[mNotice: /Stage[main]/Apache/File[/etc/apache2/mods-enabled/rewrite.load]/ensure: removed[0m
 [mNotice: /Stage[main]/Apache/File[/etc/apache2/mods-enabled/authn_core.load]/ensure: removed[0m
 [mNotice: /Stage[main]/Apache/File[/etc/apache2/mods-enabled/status.load]/ensure: removed[0m
 [mNotice: /Stage[main]/Apache/File[/etc/apache2/mods-enabled/access_compat.load]/ensure: removed[0m
@@ -203,6 +212,9 @@
 [mNotice: /Stage[main]/Apache/File[/etc/apache2/mods-enabled/mpm_event.load]/ensure: removed[0m
 [0;32mInfo: /etc/apache2/mods-enabled: Scheduling refresh of Class[Apache::Service][0m
 [0;32mInfo: Class[Apache::Service]: Scheduling refresh of Service[httpd][0m
-[mNotice: /Stage[main]/Apache::Service/Service[httpd]: Triggered 'refresh' from 61 events[0m
+[mNotice: /Stage[main]/Apache::Service/Service[httpd]/ensure: ensure changed 'stopped' to 'running'[0m
+[0;32mInfo: /Stage[main]/Apache::Service/Service[httpd]: Unscheduling refresh on Service[httpd][0m
+[mNotice: /Stage[main]/Main/Cobblerprofile[precise-mini]: Dependency Cobblerdistro[precise-mini] has failures: true[0m
+[mNotice: /Stage[main]/Main/Cobblersystem[precise-host]: Dependency Cobblerdistro[precise-mini] has failures: true[0m
 [0;32mInfo: Creating state file /var/lib/puppet/state/state.yaml[0m
-[mNotice: Finished catalog run in 44.08 seconds[0m
+[mNotice: Finished catalog run in 70.41 seconds[0m
