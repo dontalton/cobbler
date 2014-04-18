@@ -1,9 +1,9 @@
 Puppet module for managing Cobbler
 ==================================
 
-This fork supports RedHat AND Ubuntu Trusty LTS. It's also tested on 
-Ubuntu Precise LTS, but will require slight changes to go back to 
-Apache 2.2 directives.
+This fork supports Ubuntu Trusty LTS (and likely RHEL still).
+It's also tested on Ubuntu Precise LTS, but will require slight 
+changes to go back to Apache 2.2 directives.
 
 puppet-cobbler is a Puppet module used to deploy and manage Cobbler
 installation(s).
@@ -32,9 +32,6 @@ download link of ISO image and distro name:
       arch    => 'x86_64',
       isolink => 'http://archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/current/images/netboot/mini.iso',
     }
-
-
-
 
 Repos example:
 
@@ -73,10 +70,15 @@ System example:
                         netmask          => '255.255.255.0',
                       },
       },
-      netboot    => true,
-      gateway    => '10.0.0.1',
-      hostname   => 'somehost.cisco.com',
-      require    => Service[$cobbler::service_name],
+      kopts          => "netcfg/disable_autoconfig=true netcfg/dhcp_failed=true netcfg/confirm_static=true partman-auto/disk=/dev/sda",
+      power_address  => '1.1.1.1',
+      power_user     => 'power_user',
+      power_password => 'password',
+      power_id       => 'somerandomid',
+      netboot        => true,
+      gateway        => '10.0.0.1',
+      hostname       => 'somehost.cisco.com',
+      require        => Service[$cobbler::service_name],
     }
 
 System example with bonded interfaces:
@@ -105,35 +107,28 @@ System example with bonded interfaces:
                         bonding_opts   => 'miimon=300 mode=1 primary=em1',
                       },
       },
-      netboot    => true,
-      gateway    => '192.168.1.1',
-      hostname   => 'somehost.example.com',
-      require    => Service[$cobbler::service_name],
+      kopts          => "netcfg/disable_autoconfig=true netcfg/dhcp_failed=true netcfg/confirm_static=true partman-auto/disk=/dev/sda",
+      power_address  => '1.1.1.1',
+      power_user     => 'power_user',
+      power_password => 'password',
+      power_id       => 'somerandomid',
+      netboot        => true,
+      gateway        => '10.0.0.1',
+      hostname       => 'somehost.cisco.com',
+      require        => Service[$cobbler::service_name],
     }
 
 
 Dependencies
 ------------
 
-Some functionality is dependent on other modules:
-
 - [apache](http://forge.puppetlabs.com/puppetlabs/apache)
-
-Notes
------
-
-
-Contributors
-------------
-
- * Don Talton
 
 Copyright and License
 ---------------------
 
 Copyright (C) 2012 Jakov Sosic <jsosic@gmail.com>
-Copyright (C) 2014 Cisco Systems
-  Author Don Talton <dotalton@cisco.com>
+Copyright (C) 2014 Cisco Systems, Don Talton <dotalton@cisco.com>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

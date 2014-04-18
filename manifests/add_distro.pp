@@ -12,7 +12,7 @@ define cobbler::add_distro ($arch,$isolink) {
     $kernel = "${cobbler::distro_path}/${distro}/linux"
     $initrd = "${cobbler::distro_path}/${distro}/initrd.gz"
   } else {
-    fail ("Unrecognized OS")
+    fail ('Unrecognized OS')
   }
 
   cobblerdistro { $distro :
@@ -27,7 +27,7 @@ define cobbler::add_distro ($arch,$isolink) {
   $defaultrootpw = $cobbler::defaultrootpw
   file { "${cobbler::distro_path}/kickstarts/cisco.ks":
     ensure  => present,
-    content => template("cobbler/cisco.ks.erb"),
+    content => template('cobbler/cisco.ks.erb'),
     require => File["${cobbler::distro_path}/kickstarts"],
   }
 }

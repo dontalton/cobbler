@@ -41,7 +41,6 @@ class cobbler::params {
   $manage_dhcp        = 1
   $dhcp_option        = 'dnsmasq'
   $dhcp_interfaces    = 'eth0'
-  $dhcp_dynamic_range = 0
 
   # dns options
   $manage_dns = 1

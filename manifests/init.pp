@@ -20,9 +20,6 @@
 #   - $manage_dhcp [type: bool]
 #     Wether or not to manage ISC DHCP.
 #
-#   - $dhcp_dynamic_range [type: string]
-#     Range for DHCP server
-#
 #   - $manage_dns [type: string]
 #     Wether or not to manage DNS
 #
@@ -30,14 +27,21 @@
 #     Which DNS deamon to manage - Bind or dnsmasq. If dnsmasq,
 #     then dnsmasq has to be used for DHCP too.
 #
+#   - $domain [type: string]
+#     The domain name to use. Eg. cisco.com
+#
+#   - $dhcp_option [type: string]
+#     Which dhcp server to use
+#     Just use dnsmasq.
+#
 #   - $manage_tftpd [type: bool]
-#     Wether or not to manage TFTP daemon.
+#     Manage the tftpd daemon.
 #
 #   - $tftpd_package [type:string]
 #     Which TFTP daemon to use.
 #
 #   - $server_ip [type: string]
-#     IP address of a server.
+#     IP address of the cobbler server.
 #
 #   - $next_server_ip [type: string]
 #     Next Server in cobbler config.
@@ -67,22 +71,33 @@
 #     repo, profiles and systems which are not managed by puppet.
 #     Default is true.
 #
-# Actions:
-#   - Install Apache
-#   - Manage Apache service
+#   - $apache_conf_dir [type: string]
+#     Path to Apache's discretionary config files.
 #
-# Requires:
-#   - puppetlabs/apache class
-#     (http://forge.puppetlabs.com/puppetlabs/apache)
+#   - $dhcp_package_isc [type: string]
+#    The package name of the isc dhcp server
+#    Should be removed.
 #
-# Sample Usage:
+#   - $dhcp_package_dnsmasq [type: string]
+#     The package name od the dnsmasq server
+#     Should be removed.
 #
+#   - $tftpd_package [type: string]
+#     The package name of tftpd
+#
+#   - $webroot [type: string]
+#     The path to cobbler in the Apache dir.
+#     eg /var/www/cobbler
+#
+#   - $diskpart [type: hash?]
+#     Something from cisco that probably needs further work.
+#
+
 class cobbler (
   $service_name         = $cobbler::params::service_name,
   $package_ensure       = $cobbler::params::package_ensure,
   $distro_path          = $cobbler::params::distro_path,
   $manage_dhcp          = $cobbler::params::manage_dhcp,
-  $dhcp_dynamic_range   = $cobbler::params::dhcp_dynamic_range,
   $manage_dns           = $cobbler::params::manage_dns,
   $dns_option           = $cobbler::params::dns_option,
   $domain               = $cobbler::params::domain,
@@ -214,7 +229,7 @@ class cobbler (
   }
 
   file { '/etc/cobbler/preseed':
-    ensure => directory,
+    ensure  => directory,
     require => Package['cobbler'],
   }
 
