@@ -10,7 +10,7 @@ class { 'cobbler':
 
 cobbler::add_distro { 'precise-mini':
   arch    => 'x86_64',
-  isolink => 'http://10.0.0.50/ubuntu-server-precise-mini.iso',
+  isolink => 'http://archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/current/images/netboot/mini.iso',
 }
 
 cobblerprofile { 'precise-mini':
@@ -26,23 +26,22 @@ package { 'yum-utils':
 }
 
 cobblersystem { 'precise-host':
-  ensure     => present,
-  profile    => 'precise-mini',
-  interfaces => { 'eth1' => {
-                    ip_address => '10.0.0.2',
-                    mac_address => '00:50:56:39:41:E7',
-                    netmask    => '255.255.255.0',
-                    gateway    => '10.0.0.1',
-                  },
+  ensure          => present,
+  profile         => 'precise-mini',
+  interfaces      => { 'eth0' => {
+                         ip_address => '10.0.0.2',
+                         mac_address => '00:50:56:39:41:E7',
+                         netmask    => '255.255.255.0',
+                       },
 
   },
-  nameservers => '8.8.8.8',
-  netboot    => true,
-  kopts      => "netcfg/disable_autoconfig=true netcfg/dhcp_failed=true netcfg/confirm_static=true partman-auto/disk=${bootdisk2}",
-  hostname   => 'foo.cisco.com',
-  require    => Service[$cobbler::service_name],
-  power_address => '1.1.1.1',
-  power_user => 'don',
+  nameservers    => '10.0.0.1',
+  netboot        => true,
+  kopts          => "netcfg/disable_autoconfig=true netcfg/dhcp_failed=true netcfg/confirm_static=true partman-auto/disk=${bootdisk2}",
+  hostname       => 'foo.cisco.com',
+  require        => Service[$cobbler::service_name],
+  power_address  => '10.0.0.202',
+  power_user     => 'don',
   power_password => 'mypass',
-  power_id => 'randomid',
+  power_id       => 'randomid',
 }
