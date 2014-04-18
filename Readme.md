@@ -1,7 +1,7 @@
-Puppet module for managing Cobbler
+Puppet module for installing and managing Cobbler
 ==================================
 
-This fork supports Ubuntu Trusty LTS (and likely RHEL still).
+Supports Ubuntu Trusty LTS (and likely RHEL).
 It's also tested on Ubuntu Precise LTS, but will require slight 
 changes to go back to Apache 2.2 directives.
 
