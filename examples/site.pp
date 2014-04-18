@@ -37,7 +37,7 @@ cobblersystem { 'precise-host':
   },
   nameservers    => '10.0.0.1',
   netboot        => true,
-  kopts          => "netcfg/disable_autoconfig=true netcfg/dhcp_failed=true netcfg/confirm_static=true partman-auto/disk=${bootdisk2}",
+  kopts          => "netcfg/disable_autoconfig=true netcfg/dhcp_failed=true netcfg/confirm_static=true partman-auto/disk=/dev/sda",
   hostname       => 'foo.cisco.com',
   require        => Service[$cobbler::service_name],
   power_address  => '10.0.0.202',
