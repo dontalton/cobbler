@@ -99,6 +99,7 @@ d-i grub-installer/only_debian boolean true
 d-i finish-install/reboot_in_progress note
 d-i pkgsel/update-policy select none
 d-i pkgsel/include string <%= @packages %>
+d-i live-installer/net-image string http://<%= @server_ip %>/cblr/ks_mirror/trusty-server/install/filesystem.squashfs
 d-i preseed/early_command string wget -O /dev/null http://$http_server:$http_port/cblr/svc/op/trig/mode/pre/system/$system_name <% if @early_command -%> ;\
 <%= @early_command %>
 <% end %>
