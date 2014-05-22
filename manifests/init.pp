@@ -226,7 +226,7 @@ class cobbler (
     owner   => root,
     group   => root,
     mode    => '0644',
-    content => template('cobbler/dnsmasq.template'),
+    content => template('cobbler/dnsmasq.template.erb'),
     require => [ Package[$dhcp_package_dnsmasq], Package['cobbler'] ],
   }
 
