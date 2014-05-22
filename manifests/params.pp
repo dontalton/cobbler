@@ -46,8 +46,8 @@ class cobbler::params {
   $dhcp_option_domain_name = 'cisco.com'
   $dhcp_option_subnet      = '255.255.255.0'
   $dhcp_server_identifier  = '2.5.1.254'
-  
-  $dhcp_interfaces    = 'eth0'
+  $dhcp_range              = '2.5.1.0,static,255.255.255.0'
+  $dhcp_interfaces         = 'eth0'
 
   # dns options
   $manage_dns = 1

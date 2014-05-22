@@ -101,6 +101,7 @@ class cobbler (
   $manage_dns             = $cobbler::params::manage_dns,
   $dns_option             = $cobbler::params::dns_option,
   $domain                 = $cobbler::params::domain,
+  $dhcp_range             = $cobbler::params::dhcp_range,
   $dhcp_option            = $cobbler::params::dhcp_option,
   $dhcp_subnet            = $cobbler::params::dhcp_subnet,
   $dhcp_netmask           = $cobbler::params::dhcp_netmask,
