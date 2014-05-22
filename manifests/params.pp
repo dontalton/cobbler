@@ -38,8 +38,15 @@ class cobbler::params {
   $defaultrootpw = 'bettergenerateityourself'
 
   # dhcp options
-  $manage_dhcp        = 1
-  $dhcp_option        = 'dnsmasq'
+  $manage_dhcp             = 1
+  $dhcp_option             = 'dnsmasq'
+  $dhcp_subnet             = '2.5.1.0'
+  $dhcp_netmask            = '255.255.255.0'
+  $dhcp_option_routers     = '2.5.1.254'
+  $dhcp_option_domain_name = 'cisco.com'
+  $dhcp_option_subnet      = '255.255.255.0'
+  $dhcp_server_identifier  = '2.5.1.254'
+  
   $dhcp_interfaces    = 'eth0'
 
   # dns options
