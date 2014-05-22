@@ -56,6 +56,7 @@ cheetah_import_whitelist:
    - "random"
    - "re"
    - "time"
+   - "orchestra"
 
 # Default createrepo_flags to use for new repositories. If you have
 # createrepo >= 0.4.10, consider "-c cache --update -C", which can
@@ -66,7 +67,7 @@ cheetah_import_whitelist:
 createrepo_flags: "-c cache -s sha"
 
 # if no kickstart is specified to profile add, use this template
-default_kickstart: /var/lib/cobbler/kickstarts/default.ks
+default_kickstart: /var/lib/cobbler/kickstarts/ubuntu-server.preseed
 
 # configure all installed systems to use these nameservers by default
 # unless defined differently in the profile.  For DHCP configurations
@@ -88,7 +89,7 @@ default_ownership:
 # The simplest way to change the password is to run 
 # openssl passwd -1
 # and put the output between the "" below.
-default_password_crypted: "$1$mF86/UHC$WvcIcX2t6crBz2onWxyac."
+default_password_crypted: "$1$yxt/nbJX$uJsZuhwFEU2yqRgr.2JRI."
 
 # the default template type to use in the absence of any
 # other detected template. If you do not specify the template 
@@ -105,7 +106,7 @@ default_template_type: "cheetah"
 # "virbr0".  This can be overriden on a per-profile
 # basis or at the koan command line though this saves
 # typing to just set it here to the most common option.
-default_virt_bridge: xenbr0
+default_virt_bridge: virbr0
 
 # use this as the default disk size for virt guests (GB)
 default_virt_file_size: 5
@@ -117,7 +118,7 @@ default_virt_ram: 512
 # is set on the profile/system, what virtualization type
 # should be assumed?  Values: xenpv, xenfv, qemu, vmware
 # (NOTE: this does not change what virt_type is chosen by import)
-default_virt_type: xenpv
+default_virt_type: qemu
 
 # enable gPXE booting? Enabling this option will cause cobbler
 # to copy the undionly.kpxe file to the tftp root directory, 
@@ -155,6 +156,10 @@ http_port: 80
 # level.
 kernel_options:
     ksdevice: bootif
+    test: ~
+    locale: en_US
+    priority: critical
+    netcfg/choose_interface: auto
     lang: ' '
     text: ~
 
