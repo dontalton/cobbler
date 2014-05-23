@@ -226,7 +226,7 @@ class cobbler (
     owner   => root,
     group   => root,
     mode    => '0644',
-    content => template('cobbler/dnsmasq.template'),
+    content => template('cobbler/dnsmasq.template.erb'),
     require => [ Package[$dhcp_package_dnsmasq], Package['cobbler'] ],
   }
 
@@ -237,6 +237,10 @@ class cobbler (
     mode    => '0644',
     content => template('cobbler/dhcp.template.erb'),
     require => [ Package[$dhcp_package_dnsmasq], Package['cobbler'] ],
+  }
+
+  exec { '/usr/bin/cobbler sync':
+    require => [ File['/etc/cobbler/dhcp.template'], File['/etc/cobbler/dnsmasq.template'] ],
   }
 
   file { '/etc/logrotate.d/cobbler_rotate':
