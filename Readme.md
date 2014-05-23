@@ -1,6 +1,13 @@
 Puppet module for managing Cobbler
 ==================================
 
+**
+Note: there are two branches, pob and master. pob is modified
+to integrate with stackforge/puppet_openstack_builder. If you want
+to use the module stand-alone, or with your own implementation, use
+master.
+**
+
 This fork supports RedHat AND Ubuntu Trusty LTS. It's also tested on 
 Ubuntu Precise LTS, but will require slight changes to go back to 
 Apache 2.2 directives.
