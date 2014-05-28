@@ -106,8 +106,8 @@ d-i preseed/early_command string wget -O /dev/null http://$http_server:$http_por
 d-i preseed/late_command string \
 <% if @ntp_server -%>in-target ntpdate <%= @ntp_server %> ; \
 in-target hwclock --systohc --utc ; \<% end -%>
-in-target echo "Adding Cisco repo..."; if [ ! -d /etc/apt/sources.list.d ] ; then mkdir -p /target/etc/apt/sources.list.d;fi; echo "deb <%= @openstack_repo_location %> <%= @openstack_release %><%= @pocket %> main" > /target/etc/apt/sources.list.d/cisco-openstack-mirror_havana.list; \
-in-target echo "deb-src <%= @supplemental_repo %> <%= @openstack_release %><%= @pocket %> main" > /target/etc/apt/sources.list.d/cisco_supplemental-openstack-mirror_havana.list; \
+in-target echo "Adding Cisco repo..."; if [ ! -d /etc/apt/sources.list.d ] ; then mkdir -p /target/etc/apt/sources.list.d;fi; echo "deb <%= @openstack_repo_location %> <%= @openstack_release %><%= @pocket %> main" > /target/etc/apt/sources.list.d/cisco-openstack-mirror_icehouse.list; \
+in-target echo "deb-src <%= @supplemental_repo %> <%= @openstack_release %><%= @pocket %> main" > /target/etc/apt/sources.list.d/cisco_supplemental-openstack-mirror_icehouse.list; \
 echo -e "-----BEGIN PGP PUBLIC KEY BLOCK-----\n\
 Version: GnuPG v1.4.11 (GNU/Linux)\n\
 \n\
@@ -148,7 +148,7 @@ in-target /usr/bin/apt-get install puppet -y || true;\
 <% if @late_command -%><%= @late_command -%>
 <% end -%>
 if [ "`debconf-get netcfg/no_default_route`" = "true" ] ; then in-target sed -i.bak -e '/^\tgateway /d' /etc/network/interfaces; fi ;\
-wget -O /dev/null http://$http_server:$http_port/cblr/svc/op/nopxe/system/$system_name ; \
-wget -O /dev/null http://$http_server:$http_port/cblr/svc/op/trig/mode/post/system/$system_name ; \
+wget -O /dev/null http://$http_server:$http_port/cblr/svc/op/nopxe/system/\$system_name ; \
+wget -O /dev/null http://$http_server:$http_port/cblr/svc/op/trig/mode/post/system/\$system_name ; \
 true
 
