@@ -109,7 +109,7 @@ cobblersystem { 'test.domain.com':
   
   newproperty(:power_type) do
     desc 'power type'
-    defaultto 'cisco_ucs'
+    defaultto 'ipmilan'
   end
 
   newproperty(:power_user) do
