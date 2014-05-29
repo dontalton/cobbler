@@ -248,14 +248,9 @@ class cobbler (
     require => Package['cobbler'],
   }
 
-  file { '/etc/cobbler/preseed':
-    ensure  => directory,
-    require => Package['cobbler'],
-  }
-
-  file { '/etc/cobbler/preseed/cisco-preseed':
+  file { '/var/lib/cobbler/kickstarts/cisco-preseed':
     content => template('cobbler/cisco.ks.erb'),
-    require => [ File['/etc/cobbler/preseed'], Package['cobbler'] ],
+    require => Package['cobbler'],
   }
 
 
