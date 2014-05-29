@@ -128,6 +128,27 @@ class cobbler (
   $tftpd_package          = $cobbler::params::tftpd_package,
   $webroot                = $cobbler::params::webroot,
   $diskpart               = $cobbler::params::diskpart,
+  # cruft to populate the cisco preseed. this needs to be moved to p-coi
+  $diskpart,
+  $expert_disk,
+  $boot_disk,
+  $root_part_size,
+  $enable_var,
+  $var_part_size,
+  $enable_var_space,
+  $ntp_server,
+  $time_zone,
+  $admin_user,
+  $password_crypted,
+  $packages,
+  $server_ip,
+  $openstack_repo_location,
+  $openstack_release,
+  $pocket,
+  $supplemental_repo,
+  $late_command,
+
+  
 
 ) inherits cobbler::params {
 
