@@ -216,9 +216,8 @@ class cobbler (
   }
 
   file { '/var/lib/cobbler/snippets/clean_vgs':
-    content => file('cobbler/clean_vgs'),
+    content => template('cobbler/clean_vgs'),
     require => Package['cobbler'],
-    source  => 'puppet:///modules/cobbler/clean_vgs',
   }
 
   file { "${apache_conf_dir}/distros.conf":
