@@ -22,7 +22,7 @@ define cobbler::add_distro ($arch,$isolink) {
     destdir => $cobbler::distro_path,
     kernel  => $kernel,
     initrd  => $initrd,
-    require => [ Service[$cobbler::service_name], Service[$cobbler::apache_service], File['/etc/cobbler/preseed/cisco-preseed'] ],
+    require => [ Service[$cobbler::service_name], Service[$cobbler::apache_service], File['/var/lib/cobbler/kickstarts/cisco-preseed'] ],
   }
   $defaultrootpw = $cobbler::defaultrootpw
   file { "${cobbler::distro_path}/kickstarts/cisco.ks":
