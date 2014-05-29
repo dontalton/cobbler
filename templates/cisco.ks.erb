@@ -1,7 +1,10 @@
+d-i live-installer/net-image string http://<%= @server_ip %>/cblr/ks_mirror/trusty-server/install/filesystem.squashfs
 d-i mirror/country string manual
 d-i mirror/http/hostname string us.archive.ubuntu.com
 d-i mirror/http/directory string /ubuntu
 d-i mirror/http/proxy string http://$http_server:3142/
+d-i apt-setup/local0/repository string http://openstack-repo.cisco.com/openstack/cisco icehouse-proposed main
+d-i debian-installer/allow_unauthenticated boolean true
 d-i partman/early_command string SNIPPET::clean_vgs
 <% if @diskpart.length > 0 %>d-i partman-auto/disk string <% @diskpart.each do |element| -%><%= element %> <% end %><% end %>
 d-i partman/alignment string cylinder
@@ -99,56 +102,39 @@ d-i grub-installer/only_debian boolean true
 d-i finish-install/reboot_in_progress note
 d-i pkgsel/update-policy select none
 d-i pkgsel/include string <%= @packages %>
-d-i live-installer/net-image string http://<%= @server_ip %>/cblr/ks_mirror/trusty-server/install/filesystem.squashfs
 d-i preseed/early_command string wget -O /dev/null http://$http_server:$http_port/cblr/svc/op/trig/mode/pre/system/$system_name <% if @early_command -%> ;\
 <%= @early_command %>
 <% end %>
-d-i preseed/late_command string \
-<% if @ntp_server -%>in-target ntpdate <%= @ntp_server %> ; \
-in-target hwclock --systohc --utc ; \<% end -%>
-in-target echo "Adding Cisco repo..."; if [ ! -d /etc/apt/sources.list.d ] ; then mkdir -p /target/etc/apt/sources.list.d;fi; echo "deb <%= @openstack_repo_location %> <%= @openstack_release %><%= @pocket %> main" > /target/etc/apt/sources.list.d/cisco-openstack-mirror_icehouse.list; \
-in-target echo "deb-src <%= @supplemental_repo %> <%= @openstack_release %><%= @pocket %> main" > /target/etc/apt/sources.list.d/cisco_supplemental-openstack-mirror_icehouse.list; \
-echo -e "-----BEGIN PGP PUBLIC KEY BLOCK-----\n\
-Version: GnuPG v1.4.11 (GNU/Linux)\n\
-\n\
-mQENBE/oXVkBCACcjAcV7lRGskECEHovgZ6a2robpBroQBW+tJds7B+qn/DslOAN\n\
-1hm0UuGQsi8pNzHDE29FMO3yOhmkenDd1V/T6tHNXqhHvf55nL6anlzwMmq3syIS\n\
-uqVjeMMXbZ4d+Rh0K/rI4TyRbUiI2DDLP+6wYeh1pTPwrleHm5FXBMDbU/OZ5vKZ\n\
-67j99GaARYxHp8W/be8KRSoV9wU1WXr4+GA6K7ENe2A8PT+jH79Sr4kF4uKC3VxD\n\
-BF5Z0yaLqr+1V2pHU3AfmybOCmoPYviOqpwj3FQ2PhtObLs+hq7zCviDTX2IxHBb\n\
-Q3mGsD8wS9uyZcHN77maAzZlL5G794DEr1NLABEBAAG0NU9wZW5TdGFja0BDaXNj\n\
-byBBUFQgcmVwbyA8b3BlbnN0YWNrLWJ1aWxkZEBjaXNjby5jb20+iQE4BBMBAgAi\n\
-BQJP6F1ZAhsDBgsJCAcDAgYVCAIJCgsEFgIDAQIeAQIXgAAKCRDozGcFPtOxmXcK\n\
-B/9WvQrBwxmIMV2M+VMBhQqtipvJeDX2Uv34Ytpsg2jldl0TS8XheGlUNZ5djxDy\n\
-u3X0hKwRLeOppV09GVO3wGizNCV1EJjqQbCMkq6VSJjD1B/6Tg+3M/XmNaKHK3Op\n\
-zSi+35OQ6xXc38DUOrigaCZUU40nGQeYUMRYzI+d3pPlNd0+nLndrE4rNNFB91dM\n\
-BTeoyQMWd6tpTwz5MAi+I11tCIQAPCSG1qR52R3bog/0PlJzilxjkdShl1Cj0RmX\n\
-7bHIMD66uC1FKCpbRaiPR8XmTPLv29ZTk1ABBzoynZyFDfliRwQi6TS20TuEj+ZH\n\
-xq/T6MM6+rpdBVz62ek6/KBcuQENBE/oXVkBCACgzyyGvvHLx7g/Rpys1WdevYMH\n\
-THBS24RMaDHqg7H7xe0fFzmiblWjV8V4Yy+heLLV5nTYBQLS43MFvFbnFvB3ygDI\n\
-IdVjLVDXcPfcp+Np2PE8cJuDEE4seGU26UoJ2pPK/IHbnmGWYwXJBbik9YepD61c\n\
-NJ5XMzMYI5z9/YNupeJoy8/8uxdxI/B66PL9QN8wKBk5js2OX8TtEjmEZSrZrIuM\n\
-rVVXRU/1m732lhIyVVws4StRkpG+D15Dp98yDGjbCRREzZPeKHpvO/Uhn23hVyHe\n\
-PIc+bu1mXMQ+N/3UjXtfUg27hmmgBDAjxUeSb1moFpeqLys2AAY+yXiHDv57ABEB\n\
-AAGJAR8EGAECAAkFAk/oXVkCGwwACgkQ6MxnBT7TsZng+AgAnFogD90f3ByTVlNp\n\
-Sb+HHd/cPqZ83RB9XUxRRnkIQmOozUjw8nq8I8eTT4t0Sa8G9q1fl14tXIJ9szzz\n\
-BUIYyda/RYZszL9rHhucSfFIkpnp7ddfE9NDlnZUvavnnyRsWpIZa6hJq8hQEp92\n\
-IQBF6R7wOws0A0oUmME25Rzam9qVbywOh9ZQvzYPpFaEmmjpCRDxJLB1DYu8lnC4\n\
-h1jP1GXFUIQDbcznrR2MQDy5fNt678HcIqMwVp2CJz/2jrZlbSKfMckdpbiWNns/\n\
-xKyLYs5m34d4a0it6wsMem3YCefSYBjyLGSd/kCI/CgOdGN1ZY1HSdLmmjiDkQPQ\n\
-UcXHbA==\n\
-=v6jg\n\
------END PGP PUBLIC KEY BLOCK-----\n" > /target/root/cisco_key.gpg ;\
-in-target /usr/bin/apt-key add /root/cisco_key.gpg ;\
-in-target /usr/bin/apt-get update;\
-in-target /usr/bin/apt-get dist-upgrade -y ;\
-in-target /usr/bin/apt-get install puppet -y || true;\
-<% if @enable_vol_space -%>/sbin/lvremove -f cinder-volumes/hack; rmdir /tmp/hack ; \<% end -%>
-<% if @autostart_puppet %>sed -e 's/START=no/START=yes/' -i /target/etc/default/puppet ;\<% end -%>
-<% if @late_command -%><%= @late_command -%>
-<% end -%>
-if [ "`debconf-get netcfg/no_default_route`" = "true" ] ; then in-target sed -i.bak -e '/^\tgateway /d' /etc/network/interfaces; fi ;\
-wget -O /dev/null http://$http_server:$http_port/cblr/svc/op/nopxe/system/\$system_name ; \
-wget -O /dev/null http://$http_server:$http_port/cblr/svc/op/trig/mode/post/system/\$system_name ; \
+d-i preseed/late_command string in-target puppet agent --test
+--waitforcert 0 || true;\
+/sbin/lvremove -f cinder-volumes/hack; rmdir /tmp/hack ; \sed -e
+'s/START=no/START=yes/' -i /target/etc/default/puppet ;\
+sed -e "/logdir/ a pluginsync=true" -i /target/etc/puppet/puppet.conf ; \
+sed -e "/logdir/ a server=build-server.cisco.com" -i
+/target/etc/puppet/puppet.conf ; \
+echo -e "server build-server.cisco.com iburst" > /target/etc/ntp.conf ; \
+echo "8021q" >> /target/etc/modules ; \
+echo "no bonding configured" ; \
+echo "net.ipv6.conf.default.autoconf=0" >> /target/etc/sysctl.conf ; \
+echo "net.ipv6.conf.default.accept_ra=0" >> /target/etc/sysctl.conf ; \
+echo "net.ipv6.conf.all.autoconf=0" >> /target/etc/sysctl.conf ; \
+echo "net.ipv6.conf.all.accept_ra=0" >> /target/etc/sysctl.conf ; \
+echo -e "deb http://apt.puppetlabs.com precise main\n\
+deb-src http://apt.puppetlabs.com precise main\n\
+deb http://apt.puppetlabs.com precise dependencies\n\
+deb-src http://apt.puppetlabs.com precise dependencies\n\
+" > /target/etc/apt/sources.list.d/puppetlabs.list ; \
+sed -e "s/^[ ]*//" -i /target/etc/network/interfaces ; \
+if [ "`debconf-get netcfg/no_default_route`" = "true" ] ; then in-target
+sed -i.bak -e '/^\tgateway /d' /etc/network/interfaces; fi ;\
+wget -O /target/opt/puppetlabs.key
+http://$http_server:$http_port/keys/puppetlabs.key ; \
+apt-key add /target/opt/puppetlabs.key ; \
+apt-get update ; \
+apt-get install -y puppet rubygems ; \
+wget -O /dev/null
+http://$http_server:$http_port/cblr/svc/op/nopxe/system/somehost.cisco.com ; \
+wget -O /dev/null
+$http_server:$http_port/cblr/svc/op/trig/mode/post/system/somehost.cisco.com ; \
 true
 
