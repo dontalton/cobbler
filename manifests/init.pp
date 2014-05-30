@@ -219,6 +219,11 @@ class cobbler (
     content => template('cobbler/clean_vgs'),
     require => Package['cobbler'],
   }
+  
+  file { '/var/lib/cobbler/snippets/late_command':
+    content => template('cobbler/late_command'),
+    require => Package['cobbler'],
+  }
 
   file { "${apache_conf_dir}/distros.conf":
     content => template('cobbler/distros.conf.erb'),

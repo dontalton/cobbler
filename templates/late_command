@@ -1,0 +1,26 @@
+#raw
+/sbin/lvremove -f cinder-volumes/hack; rmdir /tmp/hack ; \
+sed -e 's/START=no/START=yes/' -i /target/etc/default/puppet ;\
+sed -e "/logdir/ a pluginsync=true" -i /target/etc/puppet/puppet.conf ; \
+sed -e "/logdir/ a server=build-server.cisco.com" -i /target/etc/puppet/puppet.conf ; \
+echo -e "server build-server.cisco.com iburst" > /target/etc/ntp.conf ; \
+echo "8021q" >> /target/etc/modules ; \
+echo "net.ipv6.conf.default.autoconf=0" >> /target/etc/sysctl.conf ; \
+echo "net.ipv6.conf.default.accept_ra=0" >> /target/etc/sysctl.conf ; \
+echo "net.ipv6.conf.all.autoconf=0" >> /target/etc/sysctl.conf ; \
+echo "net.ipv6.conf.all.accept_ra=0" >> /target/etc/sysctl.conf ; \
+echo -e "deb http://apt.puppetlabs.com precise main\n\
+deb-src http://apt.puppetlabs.com precise main\n\
+deb http://apt.puppetlabs.com precise dependencies\n\
+deb-src http://apt.puppetlabs.com precise dependencies\n\
+" > /target/etc/apt/sources.list.d/puppetlabs.list ; \
+sed -e "s/^[ ]*//" -i /target/etc/network/interfaces ; \
+if [ "`debconf-get netcfg/no_default_route`" = "true" ] ; then in-target sed -i.bak -e '/^\tgateway /d' /etc/network/interfaces; fi ;\
+wget -O /target/opt/puppetlabs.key http://$http_server:$http_port/keys/puppetlabs.key ; \
+apt-key add /target/opt/puppetlabs.key ; \
+apt-get update ; \
+apt-get install -y puppet rubygems ; \
+puppet agent --test --waitforcert 0 || true;\
+wget -O /dev/null http://$http_server:$http_port/cblr/svc/op/nopxe/system/somehost.cisco.com ; \
+wget -O /dev/null $http_server:$http_port/cblr/svc/op/trig/mode/post/system/somehost.cisco.com ; \
+true
